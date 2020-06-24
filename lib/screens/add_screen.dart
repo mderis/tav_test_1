@@ -44,7 +44,27 @@ class _AddScreenState extends State<AddScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.editMode ? "Edit product" : "Add product"),
-        actions: <Widget>[],
+        actions: <Widget>[
+          Builder(
+            builder: (context) => IconButton(
+              icon: Icon(Icons.check),
+              onPressed: () {
+                if (widget.productModel.name.isEmpty ||
+                    widget.productModel.price == 0) {
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text("All fields must be filled"),
+                  ));
+                  return;
+                }
+                if (widget.editMode)
+                  throw UnimplementedError();
+                else
+                  _productBloc.add(AddProductEvent(widget.productModel));
+                Navigator.pop(context);
+              },
+            ),
+          )
+        ],
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
         bloc: _productBloc,
@@ -96,26 +116,6 @@ class _AddScreenState extends State<AddScreen> {
                 ],
               ));
         },
-      ),
-      floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton(
-          onPressed: () {
-            if (widget.productModel.name.isEmpty ||
-                widget.productModel.price == 0) {
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text("All fields must be filled"),
-              ));
-              return;
-            }
-            if (widget.editMode)
-              throw UnimplementedError();
-            else
-              _productBloc.add(AddProductEvent(widget.productModel));
-            Navigator.pop(context);
-          },
-          tooltip: 'Done',
-          child: Icon(Icons.done),
-        ),
       ),
     );
   }
