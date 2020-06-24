@@ -4,28 +4,61 @@ import 'package:flutter/material.dart';
 class ProductModel extends Equatable {
   int id;
   String name;
-  String description;
+  String imagePath;
   int price;
+  int oldPrice;
+  int count;
+  int countInCart;
+  bool isFavorite;
+
+
 
   @override
-  List<Object> get props => [id, name, description, price];
+  List<Object> get props => [
+    id,
+    name,
+    imagePath,
+    price,
+    oldPrice,
+    count,
+    countInCart,
+    isFavorite,
+  ];
 
-  ProductModel(
-      {this.id,
-      @required this.name,
-      @required this.description,
-      @required this.price});
+  ProductModel({
+    this.id,
+    @required this.name,
+    @required this.imagePath,
+    @required this.price,
+    @required this.oldPrice,
+    @required this.count,
+    @required this.countInCart,
+    @required this.isFavorite,
+  });
 
   static ProductModel fromJson(Map<String, dynamic> json) {
     return ProductModel(
       id: json['id'],
       name: json['name'],
-      description: json['description'],
+      imagePath: json['imagePath'],
       price: json['price'],
+      oldPrice: json['oldPrice'],
+      count: json['count'],
+      countInCart: json['countInCart'],
+      isFavorite: json['isFavorite'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'description': description, 'price': price};
+    return {
+      'id' : id,
+      'name' : name,
+      'imagePath' : imagePath,
+      'price' : price,
+      'oldPrice' : oldPrice,
+      'count' : count,
+      'countInCart' : countInCart,
+      'isFavorite' : isFavorite,
+    };
   }
 }

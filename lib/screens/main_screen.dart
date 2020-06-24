@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tavtestproject1/bloc/bloc.dart';
@@ -19,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _productBloc = BlocProvider.of<ProductBloc>(context);
+    _productBloc.add(GetAllProductsEvent());
   }
 
   void _goToAddScreen() {
@@ -76,9 +79,9 @@ class _MainScreenState extends State<MainScreen> {
     ProductModel product = productList[index];
     return Card(
       child: ListTile(
-        leading: Text(product.id.toString()),
+        leading: product.imagePath == null ? FlutterLogo(): Image.file(File(product.imagePath)),
         title: Text(product.name),
-        subtitle: Text(product.description),
+        subtitle: Text(product.count >0?"Count: " + product.count.toString(): "Finished!"),
         trailing: Text(product.price.toString()),
         onTap: (){},
       ),

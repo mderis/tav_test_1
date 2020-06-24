@@ -11,7 +11,7 @@ class RouteGenerator{
       case '/':
         return MaterialPageRoute(builder: (_)=> MainScreen());
       case '/add':
-        return MaterialPageRoute(builder: (_)=> AddScreen());
+        return MaterialPageRoute(builder: (_)=> AddScreen.add(args));
     }
   }
 }

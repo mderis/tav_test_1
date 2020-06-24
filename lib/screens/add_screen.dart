@@ -9,15 +9,22 @@ class AddScreen extends StatefulWidget {
   bool editMode;
   ProductModel productModel;
 
-//  AddScreen.add(AddArgs addArgs) {
-//    editMode = false;
-//    this.productModel = ProductModel(name: "", description: "", price: 0);
-//  }
+  AddScreen.add(AddArgs addArgs) {
+    editMode = false;
+    this.productModel = ProductModel(
+        name: "",
+        imagePath: null,
+        price: 0,
+        oldPrice: null,
+        count: 0,
+        countInCart: 0,
+        isFavorite: false);
+  }
 
-//  AddScreen.edit(EditArgs editArgs) {
-//    editMode = true;
-//    this.productModel = editArgs.productModel;
-//  }
+  AddScreen.edit(EditArgs editArgs) {
+    editMode = true;
+    this.productModel = editArgs.productModel;
+  }
 
   @override
   _AddScreenState createState() => _AddScreenState();
@@ -54,13 +61,6 @@ class _AddScreenState extends State<AddScreen> {
                     },
                   ),
                   new TextField(
-                    decoration: new InputDecoration(labelText: "Description"),
-                    maxLength: 50,
-                    onChanged: (text) {
-                      widget.productModel.description = text;
-                    },
-                  ),
-                  new TextField(
                     decoration: new InputDecoration(labelText: "Price"),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
@@ -68,6 +68,28 @@ class _AddScreenState extends State<AddScreen> {
                     ], //
                     onChanged: (text) {
                       widget.productModel.price =
+                          text.isEmpty ? 0 : int.parse(text);
+                    }, // Only numbers can be entered
+                  ),
+                  new TextField(
+                    decoration: new InputDecoration(labelText: "Old price"),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      WhitelistingTextInputFormatter.digitsOnly,
+                    ], //
+                    onChanged: (text) {
+                      widget.productModel.oldPrice =
+                          text.isEmpty ? null : int.parse(text);
+                    }, // Only numbers can be entered
+                  ),
+                  new TextField(
+                    decoration: new InputDecoration(labelText: "Count"),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      WhitelistingTextInputFormatter.digitsOnly,
+                    ], //
+                    onChanged: (text) {
+                      widget.productModel.count =
                           text.isEmpty ? 0 : int.parse(text);
                     }, // Only numbers can be entered
                   ),
@@ -79,7 +101,6 @@ class _AddScreenState extends State<AddScreen> {
         builder: (context) => FloatingActionButton(
           onPressed: () {
             if (widget.productModel.name.isEmpty ||
-                widget.productModel.description.isEmpty ||
                 widget.productModel.price == 0) {
               Scaffold.of(context).showSnackBar(SnackBar(
                 content: Text("All fields must be filled"),
@@ -90,6 +111,7 @@ class _AddScreenState extends State<AddScreen> {
               throw UnimplementedError();
             else
               _productBloc.add(AddProductEvent(widget.productModel));
+            Navigator.pop(context);
           },
           tooltip: 'Done',
           child: Icon(Icons.done),
