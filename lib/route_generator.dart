@@ -10,8 +10,10 @@ class RouteGenerator{
     switch (settings.name){
       case '/':
         return MaterialPageRoute(builder: (_)=> MainScreen());
-      case '/add':
+      case '/add-product':
         return MaterialPageRoute(builder: (_)=> AddScreen.add(args));
+      case '/edit-product':
+        return MaterialPageRoute(builder: (_)=> AddScreen.edit(args));
     }
   }
 }

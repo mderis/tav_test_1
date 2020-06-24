@@ -14,7 +14,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   ProductBloc _productBloc;
 
   @override
@@ -25,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _goToAddScreen() {
-    Navigator.of(context).pushNamed('/add');
+    Navigator.of(context).pushNamed('/add-product');
   }
 
   @override
@@ -44,48 +43,74 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _getProductList() {
-    return BlocBuilder<ProductBloc, ProductState>(bloc: _productBloc,builder: (context, state){
-      if(state is ProductListEmptyState){
-        return Center(
-          child: Text(
-            "Add a new product from the below",
-            style: TextStyle(color: Colors.black26),
-          ),
-        );
-      }else if (state is ProductListLoadedState){
-        return ListView.builder(
-          itemCount: state.productList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _getProductItem(state.productList, index);
-          },
-        );
-      }else if(state is ProductListLoadingState){
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-      else{
-        return Center(
-          child: Text(
-            "Something unexpected happened :(",
-            style: TextStyle(fontSize: 32, color: Colors.redAccent),
-          ),
-        );
-      }
-    },);
+    return BlocBuilder<ProductBloc, ProductState>(
+      bloc: _productBloc,
+      builder: (context, state) {
+        if (state is ProductListEmptyState) {
+          return Center(
+            child: Text(
+              "Add a new product from the below",
+              style: TextStyle(color: Colors.black26),
+            ),
+          );
+        } else if (state is ProductListLoadedState) {
+          return ListView.builder(
+            itemCount: state.productList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _getProductItem(state.productList, index);
+            },
+          );
+        } else if (state is ProductListLoadingState) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return Center(
+            child: Text(
+              "Something unexpected happened :(",
+              style: TextStyle(fontSize: 32, color: Colors.redAccent),
+            ),
+          );
+        }
+      },
+    );
   }
 
   Widget _getProductItem(List<ProductModel> productList, int index) {
     ProductModel product = productList[index];
     return Card(
-      child: ListTile(
-        leading: product.imagePath == null ? FlutterLogo(): Image.file(File(product.imagePath)),
-        title: Text(product.name),
-        subtitle: Text(product.count >0?"Count: " + product.count.toString(): "Finished!"),
-        trailing: Text(product.price.toString()),
-        onTap: (){},
+      child: Dismissible(
+        key: Key(product.id),
+        child: ListTile(
+          leading: product.imagePath == null
+              ? FlutterLogo()
+              : Image.file(File(product.imagePath)),
+          title: Text(product.name),
+          subtitle: Text(product.count > 0
+              ? "Count: " + product.count.toString()
+              : "Finished!"),
+          trailing: Text(product.price.toString()),
+          onTap: () {},
+        ),
+        background: Container(
+          color: Colors.red,
+          child: Icon(Icons.delete),
+        ),
+        secondaryBackground: Container(
+          color: Colors.blue,
+          child: Icon(Icons.edit),
+        ),
+        onDismissed: (direction) {
+          if (direction == DismissDirection.startToEnd) {
+            //  Handle delete
+
+          } else if (direction == DismissDirection.endToStart) {
+            //  Handle Edit
+            Navigator.pushNamed(context, 'edit-product',
+                arguments: EditArgs(product));
+          }
+        },
       ),
     );
   }
-
 }

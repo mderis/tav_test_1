@@ -14,7 +14,7 @@ class GetProductUseCase extends UseCase<ProductModel, Params>{
 
 }
 class Params extends Equatable{
-  final int id;
+  final String id;
 
   Params(this.id);
 

@@ -14,6 +14,15 @@ class AddProductEvent extends ProductEvent {
   List<Object> get props => [];
 }
 
+class DeleteProductEvent extends ProductEvent {
+  final ProductModel productModel;
+
+  DeleteProductEvent(this.productModel);
+
+  @override
+  List<Object> get props => [];
+}
+
 class GetAllProductsEvent extends ProductEvent {
   @override
   List<Object> get props => [];

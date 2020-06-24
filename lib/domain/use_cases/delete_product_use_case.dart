@@ -3,20 +3,21 @@ import 'package:tavtestproject1/core/parents/use_case.dart';
 import 'package:tavtestproject1/data/repositories/products_repository_impl.dart';
 import 'package:tavtestproject1/objects/product_model.dart';
 
-class AddProductUseCase extends UseCase<ProductModel, AddProductUseCaseParams> {
+class DeleteProductUseCase extends UseCase<bool, DeleteProductUseCaseParams>{
   final _productsRepository = ProductsRepositoryImpl();
 
   @override
-  Future<ProductModel> call(AddProductUseCaseParams params) async {
-    return await _productsRepository.create(params.productModel);
+  Future<bool> call(DeleteProductUseCaseParams params) {
+    return _productsRepository.delete(params.productModel);
   }
+
 }
 
-class AddProductUseCaseParams extends Equatable {
+class DeleteProductUseCaseParams extends Equatable{
   final ProductModel productModel;
 
-  AddProductUseCaseParams(this.productModel);
+  DeleteProductUseCaseParams(this.productModel);
 
   @override
-  List<Object> get props => [productModel];
+  List<Object> get props =>[productModel];
 }

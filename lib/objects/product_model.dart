@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class ProductModel extends Equatable {
-  int id;
+  String id;
   String name;
   String imagePath;
   int price;

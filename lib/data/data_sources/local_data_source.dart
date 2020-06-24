@@ -7,8 +7,8 @@ class LocalDataSource {
 
   var _store = intMapStoreFactory.store('products');
 
-  Future<ProductModel> findById(int id) async {
-    Finder finder = Finder(filter: Filter.byKey(id));
+  Future<ProductModel> findById(String id) async {
+    Finder finder = Finder(filter: Filter.equals('id', id));
 
     final snapshot = await _store.findFirst(await _db, finder: finder);
 
@@ -22,8 +22,17 @@ class LocalDataSource {
   Future<ProductModel> create(ProductModel productModel) async {
     var jsonProduct = productModel.toJson();
 
-    int id = await _store.add(await _db, jsonProduct);
-    return productModel..id = id;
+    productModel.id = DateTime.now().toIso8601String();
+
+    await _store.add(await _db, jsonProduct);
+    return productModel;
+  }
+
+  Future<bool> delete(ProductModel productModel) async{
+    Finder finder = Finder(filter: Filter.equals('id', productModel.id));
+
+    await _store.delete(await _db, finder: finder);
+    return true;
   }
 
   Future<List<ProductModel>> getAll() async {

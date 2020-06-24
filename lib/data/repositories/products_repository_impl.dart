@@ -11,7 +11,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
   }
 
   @override
-  Future<ProductModel> findById(int id) async {
+  Future<ProductModel> findById(String id) async {
     return await _localDataSource.findById(id);
   }
 
@@ -23,5 +23,10 @@ class ProductsRepositoryImpl extends ProductsRepository {
   @override
   Future<List<ProductModel>> search(String q) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> delete(ProductModel productModel) {
+    return _localDataSource.delete(productModel);
   }
 }
