@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
@@ -72,6 +77,51 @@ class _AddScreenState extends State<AddScreen> {
               padding: EdgeInsets.all(32),
               child: ListView(
                 children: <Widget>[
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      InkWell(
+                        child: SizedBox(
+                          width: 200,
+                          height: 200,
+                          child: CircleAvatar(
+                            backgroundImage: widget.productModel.imagePath == null
+                                ? AssetImage("assets/images/default_product.png")
+                                : FileImage(File(widget.productModel.imagePath)),
+                            radius: 15,
+                          ),
+                        ),
+                        onTap: ()async {
+                          final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+                          setState(() {
+                            widget.productModel.imagePath = pickedFile.path;
+                          });
+                        },
+                      ),
+                      Positioned(
+                        left: 0,
+                        right: 150,
+                        bottom: 0,
+                        child: FlatButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.productModel.imagePath = null;
+                            });;
+                          },
+                          color: Theme.of(context)
+                              .primaryColorLight
+                              .withOpacity(.5),
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.red,
+                            size: 45,
+                          ),
+                          padding: EdgeInsets.all(0),
+                          shape: CircleBorder(),
+                        ),
+                      )
+                    ],
+                  ),
                   new TextFormField(
                     initialValue: widget.productModel.name,
                     decoration: new InputDecoration(labelText: "Name"),
@@ -86,19 +136,23 @@ class _AddScreenState extends State<AddScreen> {
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,
-                    ], //
+                    ],
+                    //
                     onChanged: (text) {
                       widget.productModel.price =
                           text.isEmpty ? 0 : int.parse(text);
                     }, // Only numbers can be entered
                   ),
                   new TextFormField(
-                    initialValue: widget.productModel.oldPrice == null? "": widget.productModel.oldPrice.toString(),
+                    initialValue: widget.productModel.oldPrice == null
+                        ? ""
+                        : widget.productModel.oldPrice.toString(),
                     decoration: new InputDecoration(labelText: "Old price"),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,
-                    ], //
+                    ],
+                    //
                     onChanged: (text) {
                       widget.productModel.oldPrice =
                           text.isEmpty ? null : int.parse(text);
@@ -110,7 +164,8 @@ class _AddScreenState extends State<AddScreen> {
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,
-                    ], //
+                    ],
+                    //
                     onChanged: (text) {
                       widget.productModel.count =
                           text.isEmpty ? 0 : int.parse(text);

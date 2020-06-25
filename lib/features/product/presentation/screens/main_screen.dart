@@ -84,9 +84,14 @@ class _MainScreenState extends State<MainScreen> {
       child: Dismissible(
         key: Key(product.id),
         child: ListTile(
-          leading: product.imagePath == null
-              ? FlutterLogo()
-              : Image.file(File(product.imagePath)),
+          leading: Hero(
+            tag: product.id,
+            child: CircleAvatar(
+              backgroundImage: product.imagePath == null
+                  ? AssetImage("assets/images/default_product.png")
+                  : FileImage(File(product.imagePath)),
+            ),
+          ),
           title: Text(product.name),
           subtitle: Text(product.count > 0
               ? "Count: " + product.count.toString()
@@ -127,7 +132,6 @@ class _MainScreenState extends State<MainScreen> {
                           style: TextStyle(color: Colors.red),
                         ),
                         onPressed: () {
-                          // TODO: Delete the item from DB etc..
                           _productBloc.add(DeleteProductEvent(product));
                           Navigator.of(context).pop();
                         },
