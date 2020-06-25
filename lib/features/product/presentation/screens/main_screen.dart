@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tavtestproject1/bloc/bloc.dart';
-import 'package:tavtestproject1/objects/product_model.dart';
+import 'package:tavtestproject1/features/product/data/models/product_model.dart';
+import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
 
 class MainScreen extends StatefulWidget {

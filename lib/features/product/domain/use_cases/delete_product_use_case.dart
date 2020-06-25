@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:tavtestproject1/core/parents/use_case.dart';
-import 'package:tavtestproject1/data/repositories/products_repository_impl.dart';
-import 'package:tavtestproject1/objects/product_model.dart';
+import 'package:tavtestproject1/features/product/data/models/product_model.dart';
+import 'package:tavtestproject1/features/product/data/repositories/products_repository_impl.dart';
 
 class DeleteProductUseCase extends UseCase<bool, DeleteProductUseCaseParams>{
   final _productsRepository = ProductsRepositoryImpl();
