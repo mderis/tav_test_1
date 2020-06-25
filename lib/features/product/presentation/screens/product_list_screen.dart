@@ -6,14 +6,14 @@ import 'package:tavtestproject1/features/product/data/models/product_model.dart'
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
 
-class MainScreen extends StatefulWidget {
-  MainScreen({Key key}) : super(key: key);
+class AddProductListScreen extends StatefulWidget {
+  AddProductListScreen({Key key}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<AddProductListScreen> {
   ProductBloc _productBloc;
 
   bool searchMode = false;

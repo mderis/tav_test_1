@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'features/product/data/models/product_model.dart';
-import 'features/product/presentation/screens/add_screen.dart';
-import 'features/product/presentation/screens/main_screen.dart';
+import 'features/product/presentation/screens/add_product_screen.dart';
+import 'features/product/presentation/screens/product_list_screen.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
@@ -9,7 +9,7 @@ class RouteGenerator{
 
     switch (settings.name){
       case '/':
-        return MaterialPageRoute(builder: (_)=> MainScreen());
+        return MaterialPageRoute(builder: (_)=> AddProductListScreen());
       case '/add-product':
         return MaterialPageRoute(builder: (_)=> AddScreen.add(args));
       case '/edit-product':
