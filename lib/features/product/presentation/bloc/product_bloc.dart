@@ -8,6 +8,7 @@ import 'package:tavtestproject1/features/product/domain/use_cases/add_product_us
 import 'package:tavtestproject1/features/product/domain/use_cases/delete_product_use_case.dart';
 import 'package:tavtestproject1/features/product/domain/use_cases/edit_product_use_case.dart';
 import 'package:tavtestproject1/features/product/domain/use_cases/get_all_products_use_case.dart';
+import 'package:tavtestproject1/features/product/domain/use_cases/get_product_use_case.dart';
 import 'package:tavtestproject1/features/product/domain/use_cases/search_products_use_case.dart';
 
 import 'bloc.dart';
@@ -43,9 +44,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           DeleteProductUseCaseParams(event.productModel));
       add(GetAllProductsEvent());
     } else if (event is EditProductEvent) {
-      ProductModel productModel = await _editProductUseCase(
-          EditProductUseCaseParams(event.productModel));
-      yield (ProductUpdatedState(productModel));
+      await _editProductUseCase(EditProductUseCaseParams(event.productModel));
       add(GetAllProductsEvent());
     }
   }

@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,11 +8,11 @@ import 'package:tavtestproject1/features/product/data/models/product_model.dart'
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
 
-class AddScreen extends StatefulWidget {
+class ProductAddScreen extends StatefulWidget {
   bool editMode;
   ProductModel productModel;
 
-  AddScreen.add(AddArgs addArgs) {
+  ProductAddScreen.add(ProductAddArgs addArgs) {
     editMode = false;
     this.productModel = ProductModel(
         name: "",
@@ -26,16 +24,16 @@ class AddScreen extends StatefulWidget {
         isFavorite: false);
   }
 
-  AddScreen.edit(EditArgs editArgs) {
+  ProductAddScreen.edit(ProductEditArgs editArgs) {
     editMode = true;
     this.productModel = editArgs.productModel;
   }
 
   @override
-  _AddScreenState createState() => _AddScreenState();
+  _ProductAddScreenState createState() => _ProductAddScreenState();
 }
 
-class _AddScreenState extends State<AddScreen> {
+class _ProductAddScreenState extends State<ProductAddScreen> {
   ProductBloc _productBloc;
 
   @override

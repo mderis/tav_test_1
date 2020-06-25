@@ -6,14 +6,14 @@ import 'package:tavtestproject1/features/product/data/models/product_model.dart'
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
 
-class AddProductListScreen extends StatefulWidget {
-  AddProductListScreen({Key key}) : super(key: key);
+class ProductListScreen extends StatefulWidget {
+  ProductListScreen({Key key}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<AddProductListScreen> {
+class _MainScreenState extends State<ProductListScreen> {
   ProductBloc _productBloc;
 
   bool searchMode = false;
@@ -26,7 +26,7 @@ class _MainScreenState extends State<AddProductListScreen> {
   }
 
   void _goToAddScreen() {
-    Navigator.of(context).pushNamed('/add-product');
+    Navigator.of(context).pushNamed('/product/add');
   }
 
   @override
@@ -81,85 +81,85 @@ class _MainScreenState extends State<AddProductListScreen> {
   Widget _getProductItem(List<ProductModel> productList, int index) {
     ProductModel product = productList[index];
     return Card(
-      child: Dismissible(
-        key: Key(product.id),
-        child: ListTile(
-          leading: Hero(
-            tag: product.id,
-            child: CircleAvatar(
-              backgroundImage: product.imagePath == null
-                  ? AssetImage("assets/images/default_product.png")
-                  : FileImage(File(product.imagePath)),
+        child: Dismissible(
+          key: Key(product.id),
+          child: ListTile(
+            leading: Hero(
+              tag: product.id,
+              child: CircleAvatar(
+                backgroundImage: product.imagePath == null
+                    ? AssetImage("assets/images/default_product.png")
+                    : FileImage(File(product.imagePath)),
+              ),
             ),
+            title: Text(product.name),
+            subtitle: Text(product.count > 0
+                ? "Count: " + product.count.toString()
+                : "FINISHED!"),
+            trailing: Text(
+                product.price > 0 ? product.price.toString() + "\$" : "FREE"),
+            onTap: () {Navigator.pushNamed(context, '/product/details',
+                arguments: ProductDetailsArgs(product.id));},
           ),
-          title: Text(product.name),
-          subtitle: Text(product.count > 0
-              ? "Count: " + product.count.toString()
-              : "FINISHED!"),
-          trailing: Text(product.price > 0?
-          product.price.toString() + "\$":
-          "FREE"),
-          onTap: () {},
-        ),
-        background: Container(
-          color: Colors.red,
-          child: Icon(Icons.delete),
-        ),
-        secondaryBackground: Container(
-          color: Colors.blue,
-          child: Icon(Icons.edit),
-        ),
-        confirmDismiss: (direction) async {
-          if (direction == DismissDirection.startToEnd) {
-            //  Handle delete confirmation
-            final bool res = await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    content: Text(
-                        "Are you sure you want to delete ${product.name}?"),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text(
-                          "Cancel",
-                          style: TextStyle(color: Colors.black),
+          background: Container(
+            color: Colors.red,
+            child: Icon(Icons.delete),
+          ),
+          secondaryBackground: Container(
+            color: Colors.blue,
+            child: Icon(Icons.edit),
+          ),
+          confirmDismiss: (direction) async {
+            if (direction == DismissDirection.startToEnd) {
+              //  Handle delete confirmation
+              final bool res = await showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      content: Text(
+                          "Are you sure you want to delete ${product.name}?"),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      FlatButton(
-                        child: Text(
-                          "Delete",
-                          style: TextStyle(color: Colors.red),
+                        FlatButton(
+                          child: Text(
+                            "Delete",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          onPressed: () {
+                            _productBloc.add(DeleteProductEvent(product));
+                            Navigator.of(context).pop();
+                          },
                         ),
-                        onPressed: () {
-                          _productBloc.add(DeleteProductEvent(product));
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                });
-            return res;
-          } else if (direction == DismissDirection.endToStart) {
-            Navigator.pushNamed(context, '/edit-product',
-                arguments: EditArgs(product));
+                      ],
+                    );
+                  });
+              return res;
+            } else if (direction == DismissDirection.endToStart) {
+              Navigator.pushNamed(context, '/product/edit',
+                  arguments: ProductEditArgs(product));
 
+              return false;
+            }
             return false;
-          }
-          return false;
-        },
-        onDismissed: (direction) {
-          if (direction == DismissDirection.startToEnd) {
-            //  Handle delete
+          },
+          onDismissed: (direction) {
+            if (direction == DismissDirection.startToEnd) {
+              //  Handle delete
 
-          } else if (direction == DismissDirection.endToStart) {
-            //  Handle Edit
-          }
-        },
-      ),
-    );
+            } else if (direction == DismissDirection.endToStart) {
+              //  Handle Edit
+            }
+          },
+        ),
+      );
   }
 
   getAppBar(BuildContext context) {

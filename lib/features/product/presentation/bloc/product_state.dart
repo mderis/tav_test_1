@@ -23,12 +23,3 @@ class ProductListLoadedState extends ProductState {
   @override
   List<Object> get props => [productList];
 }
-
-class ProductUpdatedState extends ProductState {
-  final ProductModel product;
-
-  ProductUpdatedState(this.product);
-
-  @override
-  List<Object> get props => [product];
-}
