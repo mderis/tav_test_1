@@ -29,4 +29,9 @@ class ProductsRepositoryImpl extends ProductsRepository {
   Future<bool> delete(ProductModel productModel) {
     return _localDataSource.delete(productModel);
   }
+
+  @override
+  Future<ProductModel> edit(ProductModel productModel) {
+    return _localDataSource.edit(productModel);
+  }
 }

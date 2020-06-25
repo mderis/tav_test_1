@@ -19,6 +19,7 @@ class RouteGenerator{
 }
 
 class AddArgs{
+
 }
 
 class EditArgs{

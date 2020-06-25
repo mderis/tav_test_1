@@ -49,15 +49,14 @@ class _AddScreenState extends State<AddScreen> {
             builder: (context) => IconButton(
               icon: Icon(Icons.check),
               onPressed: () {
-                if (widget.productModel.name.isEmpty ||
-                    widget.productModel.price == 0) {
+                if (widget.productModel.name.isEmpty) {
                   Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text("All fields must be filled"),
                   ));
                   return;
                 }
                 if (widget.editMode)
-                  throw UnimplementedError();
+                  _productBloc.add(EditProductEvent(widget.productModel));
                 else
                   _productBloc.add(AddProductEvent(widget.productModel));
                 Navigator.pop(context);
@@ -73,14 +72,16 @@ class _AddScreenState extends State<AddScreen> {
               padding: EdgeInsets.all(32),
               child: ListView(
                 children: <Widget>[
-                  new TextField(
+                  new TextFormField(
+                    initialValue: widget.productModel.name,
                     decoration: new InputDecoration(labelText: "Name"),
                     maxLength: 20,
                     onChanged: (text) {
                       widget.productModel.name = text;
                     },
                   ),
-                  new TextField(
+                  new TextFormField(
+                    initialValue: widget.productModel.price.toString(),
                     decoration: new InputDecoration(labelText: "Price"),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
@@ -91,7 +92,8 @@ class _AddScreenState extends State<AddScreen> {
                           text.isEmpty ? 0 : int.parse(text);
                     }, // Only numbers can be entered
                   ),
-                  new TextField(
+                  new TextFormField(
+                    initialValue: widget.productModel.oldPrice == null? "": widget.productModel.oldPrice.toString(),
                     decoration: new InputDecoration(labelText: "Old price"),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
@@ -102,7 +104,8 @@ class _AddScreenState extends State<AddScreen> {
                           text.isEmpty ? null : int.parse(text);
                     }, // Only numbers can be entered
                   ),
-                  new TextField(
+                  new TextFormField(
+                    initialValue: widget.productModel.count.toString(),
                     decoration: new InputDecoration(labelText: "Count"),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[

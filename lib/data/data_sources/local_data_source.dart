@@ -28,6 +28,12 @@ class LocalDataSource {
     return productModel;
   }
 
+  Future<ProductModel> edit(ProductModel productModel) async {
+    Finder finder = Finder(filter: Filter.equals('id', productModel.id));
+    await _store.update(await _db, productModel.toJson(), finder: finder);
+    return productModel;
+  }
+
   Future<bool> delete(ProductModel productModel) async{
     Finder finder = Finder(filter: Filter.equals('id', productModel.id));
 

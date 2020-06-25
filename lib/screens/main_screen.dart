@@ -100,14 +100,53 @@ class _MainScreenState extends State<MainScreen> {
           color: Colors.blue,
           child: Icon(Icons.edit),
         ),
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.startToEnd) {
+            //  Handle delete confirmation
+            final bool res = await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Text(
+                        "Are you sure you want to delete ${product.name}?"),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      FlatButton(
+                        child: Text(
+                          "Delete",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                        onPressed: () {
+                          // TODO: Delete the item from DB etc..
+                          _productBloc.add(DeleteProductEvent(product));
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                });
+            return res;
+          } else if (direction == DismissDirection.endToStart) {
+            Navigator.pushNamed(context, '/edit-product',
+                arguments: EditArgs(product));
+
+            return false;
+          }
+        },
         onDismissed: (direction) {
           if (direction == DismissDirection.startToEnd) {
             //  Handle delete
 
           } else if (direction == DismissDirection.endToStart) {
             //  Handle Edit
-            Navigator.pushNamed(context, 'edit-product',
-                arguments: EditArgs(product));
           }
         },
       ),

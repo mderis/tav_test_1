@@ -6,4 +6,5 @@ abstract class ProductsRepository {
   Future<List<ProductModel>> getAll();
   Future<List<ProductModel>> search(String q);
   Future<bool> delete(ProductModel productModel);
+  Future<ProductModel> edit(ProductModel productModel);
 }
