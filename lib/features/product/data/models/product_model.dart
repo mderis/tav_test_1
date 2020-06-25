@@ -11,8 +11,6 @@ class ProductModel extends Equatable {
   int countInCart;
   bool isFavorite;
 
-
-
   @override
   List<Object> get props => [
     id,
@@ -35,6 +33,8 @@ class ProductModel extends Equatable {
     @required this.countInCart,
     @required this.isFavorite,
   });
+
+  int get availableCount => count - countInCart;
 
   static ProductModel fromJson(Map<String, dynamic> json) {
     return ProductModel(

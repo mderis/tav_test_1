@@ -23,7 +23,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
 
   @override
   Future<List<ProductModel>> search(String q) {
-    throw UnimplementedError();
+    return _localDataSource.search(q);
   }
 
   @override

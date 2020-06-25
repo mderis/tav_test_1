@@ -32,7 +32,7 @@ class EditProductEvent extends ProductEvent {
   List<Object> get props => [productModel];
 }
 
-class GetProductEvent extends ProductEvent{
+class GetProductEvent extends ProductEvent {
   final String id;
 
   GetProductEvent(this.id);
@@ -44,4 +44,13 @@ class GetProductEvent extends ProductEvent{
 class GetAllProductsEvent extends ProductEvent {
   @override
   List<Object> get props => [];
+}
+
+class SearchProductsEvent extends ProductEvent {
+  final String q;
+
+  SearchProductsEvent(this.q);
+
+  @override
+  List<Object> get props => [q];
 }

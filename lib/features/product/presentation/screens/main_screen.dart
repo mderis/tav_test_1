@@ -16,6 +16,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   ProductBloc _productBloc;
 
+  bool searchMode = false;
+
   @override
   void initState() {
     super.initState();
@@ -30,9 +32,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Products list"),
-      ),
+      appBar: getAppBar(context),
       body: _getProductList(),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToAddScreen,
@@ -47,14 +47,14 @@ class _MainScreenState extends State<MainScreen> {
       bloc: _productBloc,
       builder: (context, state) {
         if (state is ProductListLoadedState) {
-          if(state.productList.length == 0){
+          if (state.productList.length == 0) {
             return Center(
               child: Text(
                 "Add a new product from the below",
                 style: TextStyle(color: Colors.black26),
               ),
             );
-          }else{
+          } else {
             return ListView.builder(
               itemCount: state.productList.length,
               itemBuilder: (BuildContext context, int index) {
@@ -154,5 +154,49 @@ class _MainScreenState extends State<MainScreen> {
         },
       ),
     );
+  }
+
+  getAppBar(BuildContext context) {
+    if (searchMode)
+      return AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          title: BlocBuilder<ProductBloc, ProductState>(
+              bloc: BlocProvider.of<ProductBloc>(context),
+              builder: (context, state) {
+                return TextFormField(
+                  onChanged: (value) {
+                    if (state is ProductListLoadingState) return;
+                    _productBloc.add(SearchProductsEvent(value));
+                  },
+                  autofocus: true,
+                  decoration: InputDecoration(
+                      hintText: "Search ...",
+                      border: InputBorder.none,
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          setState(() {
+                            searchMode = false;
+                            _productBloc.add(GetAllProductsEvent());
+                          });
+                        },
+                      )),
+                );
+              }));
+    else
+      return AppBar(
+        automaticallyImplyLeading: false,
+        title: Text("Products list"),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                setState(() {
+                  searchMode = true;
+                });
+              }),
+        ],
+      );
   }
 }

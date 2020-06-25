@@ -51,4 +51,21 @@ class LocalDataSource {
 
     return productList;
   }
+  
+  Future<List<ProductModel>> search(String q) async {
+    final finder = Finder(
+        filter: Filter.or([
+          Filter.matchesRegExp('name', RegExp(q, caseSensitive: false)),
+        ]),
+        sortOrders: [
+      //    SortOrder('name'),
+        ]);
+
+    final snapshot = await _store.find(await _db, finder: finder);
+
+    final productList =
+        snapshot.map((e) => ProductModel.fromJson(e.value)).toList();
+
+    return productList;
+  }
 }
