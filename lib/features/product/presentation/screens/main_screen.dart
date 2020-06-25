@@ -95,8 +95,10 @@ class _MainScreenState extends State<MainScreen> {
           title: Text(product.name),
           subtitle: Text(product.count > 0
               ? "Count: " + product.count.toString()
-              : "Finished!"),
-          trailing: Text(product.price.toString()),
+              : "FINISHED!"),
+          trailing: Text(product.price > 0?
+          product.price.toString() + "\$":
+          "FREE"),
           onTap: () {},
         ),
         background: Container(
