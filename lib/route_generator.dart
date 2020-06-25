@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tavtestproject1/objects/product_model.dart';
-import 'package:tavtestproject1/screens/add_screen.dart';
-import 'package:tavtestproject1/screens/main_screen.dart';
+import 'features/product/data/models/product_model.dart';
+import 'features/product/presentation/screens/add_screen.dart';
+import 'features/product/presentation/screens/main_screen.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){

@@ -1,6 +1,6 @@
 import 'package:sembast/sembast.dart';
 import 'package:tavtestproject1/core/database/app_database.dart';
-import 'package:tavtestproject1/objects/product_model.dart';
+import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 
 class LocalDataSource {
   Future<Database> get _db async => await AppDatabase.instance.database;
@@ -20,9 +20,9 @@ class LocalDataSource {
   }
 
   Future<ProductModel> create(ProductModel productModel) async {
-    var jsonProduct = productModel.toJson();
-
     productModel.id = DateTime.now().toIso8601String();
+
+    var jsonProduct = productModel.toJson();
 
     await _store.add(await _db, jsonProduct);
     return productModel;

@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:tavtestproject1/core/parents/use_case.dart';
-import 'package:tavtestproject1/domain/use_cases/add_product_use_case.dart';
-import 'package:tavtestproject1/domain/use_cases/delete_product_use_case.dart';
-import 'package:tavtestproject1/domain/use_cases/edit_product_use_case.dart';
-import 'package:tavtestproject1/domain/use_cases/get_all_products_use_case.dart';
-import 'package:tavtestproject1/objects/product_model.dart';
+import 'package:tavtestproject1/features/product/data/models/product_model.dart';
+import 'package:tavtestproject1/features/product/domain/use_cases/add_product_use_case.dart';
+import 'package:tavtestproject1/features/product/domain/use_cases/delete_product_use_case.dart';
+import 'package:tavtestproject1/features/product/domain/use_cases/edit_product_use_case.dart';
+import 'package:tavtestproject1/features/product/domain/use_cases/get_all_products_use_case.dart';
 
-import './bloc.dart';
+import 'bloc.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
