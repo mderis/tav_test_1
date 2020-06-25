@@ -46,20 +46,22 @@ class _MainScreenState extends State<MainScreen> {
     return BlocBuilder<ProductBloc, ProductState>(
       bloc: _productBloc,
       builder: (context, state) {
-        if (state is ProductListEmptyState) {
-          return Center(
-            child: Text(
-              "Add a new product from the below",
-              style: TextStyle(color: Colors.black26),
-            ),
-          );
-        } else if (state is ProductListLoadedState) {
-          return ListView.builder(
-            itemCount: state.productList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return _getProductItem(state.productList, index);
-            },
-          );
+        if (state is ProductListLoadedState) {
+          if(state.productList.length == 0){
+            return Center(
+              child: Text(
+                "Add a new product from the below",
+                style: TextStyle(color: Colors.black26),
+              ),
+            );
+          }else{
+            return ListView.builder(
+              itemCount: state.productList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _getProductItem(state.productList, index);
+              },
+            );
+          }
         } else if (state is ProductListLoadingState) {
           return Center(
             child: CircularProgressIndicator(),
@@ -140,6 +142,7 @@ class _MainScreenState extends State<MainScreen> {
 
             return false;
           }
+          return false;
         },
         onDismissed: (direction) {
           if (direction == DismissDirection.startToEnd) {
