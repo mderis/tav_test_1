@@ -83,14 +83,18 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           width: 200,
                           height: 200,
                           child: CircleAvatar(
-                            backgroundImage: widget.productModel.imagePath == null
-                                ? AssetImage("assets/images/default_product.png")
-                                : FileImage(File(widget.productModel.imagePath)),
+                            backgroundImage:
+                                widget.productModel.imagePath == null
+                                    ? AssetImage(
+                                        "assets/images/default_product.png")
+                                    : FileImage(
+                                        File(widget.productModel.imagePath)),
                             radius: 15,
                           ),
                         ),
-                        onTap: ()async {
-                          final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+                        onTap: () async {
+                          final pickedFile = await ImagePicker()
+                              .getImage(source: ImageSource.gallery);
                           setState(() {
                             widget.productModel.imagePath = pickedFile.path;
                           });
@@ -104,7 +108,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           onPressed: () {
                             setState(() {
                               widget.productModel.imagePath = null;
-                            });;
+                            });
+                            ;
                           },
                           color: Theme.of(context)
                               .primaryColorLight
