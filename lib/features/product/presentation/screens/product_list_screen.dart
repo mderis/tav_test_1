@@ -81,85 +81,87 @@ class _MainScreenState extends State<ProductListScreen> {
   Widget _getProductItem(List<ProductModel> productList, int index) {
     ProductModel product = productList[index];
     return Card(
-        child: Dismissible(
-          key: Key(product.id),
-          child: ListTile(
-            leading: Hero(
-              tag: product.id,
-              child: CircleAvatar(
-                backgroundImage: product.imagePath == null
-                    ? AssetImage("assets/images/default_product.png")
-                    : FileImage(File(product.imagePath)),
-              ),
+      child: Dismissible(
+        key: Key(product.id),
+        child: ListTile(
+          leading: Hero(
+            tag: product.id + "image",
+            child: CircleAvatar(
+              backgroundImage: product.imagePath == null
+                  ? AssetImage("assets/images/default_product.png")
+                  : FileImage(File(product.imagePath)),
             ),
-            title: Text(product.name),
-            subtitle: Text(product.count > 0
-                ? "Count: " + product.count.toString()
-                : "FINISHED!"),
-            trailing: Text(
-                product.price > 0 ? product.price.toString() + "\$" : "FREE"),
-            onTap: () {Navigator.pushNamed(context, '/product/details',
-                arguments: ProductDetailsArgs(product.id));},
           ),
-          background: Container(
-            color: Colors.red,
-            child: Icon(Icons.delete),
-          ),
-          secondaryBackground: Container(
-            color: Colors.blue,
-            child: Icon(Icons.edit),
-          ),
-          confirmDismiss: (direction) async {
-            if (direction == DismissDirection.startToEnd) {
-              //  Handle delete confirmation
-              final bool res = await showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      content: Text(
-                          "Are you sure you want to delete ${product.name}?"),
-                      actions: <Widget>[
-                        FlatButton(
-                          child: Text(
-                            "Cancel",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        FlatButton(
-                          child: Text(
-                            "Delete",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                          onPressed: () {
-                            _productBloc.add(DeleteProductEvent(product));
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  });
-              return res;
-            } else if (direction == DismissDirection.endToStart) {
-              Navigator.pushNamed(context, '/product/edit',
-                  arguments: ProductEditArgs(product));
-
-              return false;
-            }
-            return false;
-          },
-          onDismissed: (direction) {
-            if (direction == DismissDirection.startToEnd) {
-              //  Handle delete
-
-            } else if (direction == DismissDirection.endToStart) {
-              //  Handle Edit
-            }
+          title: Text(product.name),
+          subtitle: Text(product.count > 0
+              ? "Count: " + product.count.toString()
+              : "FINISHED!"),
+          trailing: Text(
+              product.price > 0 ? product.price.toString() + "\$" : "FREE"),
+          onTap: () {
+            Navigator.pushNamed(context, '/product/details',
+                arguments: ProductDetailsArgs(product.id));
           },
         ),
-      );
+        background: Container(
+          color: Colors.red,
+          child: Icon(Icons.delete),
+        ),
+        secondaryBackground: Container(
+          color: Colors.blue,
+          child: Icon(Icons.edit),
+        ),
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.startToEnd) {
+            //  Handle delete confirmation
+            final bool res = await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Text(
+                        "Are you sure you want to delete ${product.name}?"),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      FlatButton(
+                        child: Text(
+                          "Delete",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                        onPressed: () {
+                          _productBloc.add(DeleteProductEvent(product));
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                });
+            return res;
+          } else if (direction == DismissDirection.endToStart) {
+            Navigator.pushNamed(context, '/product/edit',
+                arguments: ProductEditArgs(product));
+
+            return false;
+          }
+          return false;
+        },
+        onDismissed: (direction) {
+          if (direction == DismissDirection.startToEnd) {
+            //  Handle delete
+
+          } else if (direction == DismissDirection.endToStart) {
+            //  Handle Edit
+          }
+        },
+      ),
+    );
   }
 
   getAppBar(BuildContext context) {
