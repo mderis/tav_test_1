@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tavtestproject1/core/localization/lz.dart';
 import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
@@ -46,7 +48,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.editMode ? "Edit product" : "Add product"),
+        title: Text(widget.editMode ? translate(Lz.Product_Edit_Product_Title) : translate(Lz.Product_Add_Product_Title)),
         actions: <Widget>[
           Builder(
             builder: (context) => IconButton(
@@ -54,7 +56,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
               onPressed: () {
                 if (widget.productModel.name.isEmpty) {
                   Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("All fields must be filled"),
+                    content: Text(translate(Lz.Dialog_Text_Fill_All_Fields)),
                   ));
                   return;
                 }
@@ -127,7 +129,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   ),
                   new TextFormField(
                     initialValue: widget.productModel.name,
-                    decoration: new InputDecoration(labelText: "Name"),
+                    decoration: new InputDecoration(labelText: translate(Lz.General_Name)),
                     maxLength: 20,
                     onChanged: (text) {
                       widget.productModel.name = text;
@@ -135,7 +137,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   ),
                   new TextFormField(
                     initialValue: widget.productModel.price.toString(),
-                    decoration: new InputDecoration(labelText: "Price"),
+                    decoration: new InputDecoration(labelText: translate(Lz.General_Price)),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,
@@ -150,7 +152,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     initialValue: widget.productModel.oldPrice == null
                         ? ""
                         : widget.productModel.oldPrice.toString(),
-                    decoration: new InputDecoration(labelText: "Old price"),
+                    decoration: new InputDecoration(labelText: translate(Lz.General_Old_Price)),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,
@@ -163,7 +165,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   ),
                   new TextFormField(
                     initialValue: widget.productModel.count.toString(),
-                    decoration: new InputDecoration(labelText: "Count"),
+                    decoration: new InputDecoration(labelText: translate(Lz.General_Count)),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly,

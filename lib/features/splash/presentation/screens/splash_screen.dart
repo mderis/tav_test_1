@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tavtestproject1/core/localization/lz.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -6,15 +8,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(Duration(seconds: 3),(){
+    changeLocale(context, 'fa');
+    Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, '/product/list');
     });
-
   }
 
   @override
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
               children: <Widget>[
                 Container(
                   child: Text(
-                    "FEPCO",
+                    translate(Lz.Fepco),
                     style: TextStyle(fontSize: 64),
                   ),
                   decoration: _getTextBgDecoration(),
@@ -44,12 +44,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 Container(
                   child: Text(
-                    "shopping system",
-                    style: TextStyle(fontSize: 32),
+                    translate(Lz.Modern_Shopping_System),
+                    style: TextStyle(fontSize: 24),
                   ),
                   decoration: _getTextBgDecoration(),
                 ),
-                SizedBox(height: 96,),
+                SizedBox(
+                  height: 96,
+                ),
                 CircularProgressIndicator()
               ],
             ),

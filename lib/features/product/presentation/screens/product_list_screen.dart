@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/global.dart';
+import 'package:tavtestproject1/core/localization/lz.dart';
 import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
@@ -36,7 +38,7 @@ class _MainScreenState extends State<ProductListScreen> {
       body: _getProductList(),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToAddScreen,
-        tooltip: 'Add',
+        tooltip: translate(Lz.General_Add),
         child: Icon(Icons.add),
       ),
     );
@@ -50,7 +52,7 @@ class _MainScreenState extends State<ProductListScreen> {
           if (state.productList.length == 0) {
             return Center(
               child: Text(
-                "Add a new product from the below",
+                translate(Lz.Product_Empty_List_Message),
                 style: TextStyle(color: Colors.black26),
               ),
             );
@@ -94,8 +96,8 @@ class _MainScreenState extends State<ProductListScreen> {
           ),
           title: Text(product.name),
           subtitle: Text(product.count > 0
-              ? "Count: " + product.count.toString()
-              : "FINISHED!"),
+              ? translate(Lz.General_Count) + ": " + product.count.toString()
+              : translate(Lz.General_Finished)),
           trailing: Text(
               product.price > 0 ? product.price.toString() + "\$" : "FREE"),
           onTap: () {
@@ -119,11 +121,11 @@ class _MainScreenState extends State<ProductListScreen> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     content: Text(
-                        "Are you sure you want to delete ${product.name}?"),
+                        translate(Lz.Dialog_Text_Delete_Confirmation, args: {'name': product.name})),
                     actions: <Widget>[
                       FlatButton(
                         child: Text(
-                          "Cancel",
+                          translate(Lz.General_Cancel),
                           style: TextStyle(color: Colors.black),
                         ),
                         onPressed: () {
@@ -132,7 +134,7 @@ class _MainScreenState extends State<ProductListScreen> {
                       ),
                       FlatButton(
                         child: Text(
-                          "Delete",
+                          translate(Lz.General_Delete),
                           style: TextStyle(color: Colors.red),
                         ),
                         onPressed: () {
@@ -167,35 +169,37 @@ class _MainScreenState extends State<ProductListScreen> {
   getAppBar(BuildContext context) {
     if (searchMode)
       return AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          title: BlocBuilder<ProductBloc, ProductState>(
-              bloc: BlocProvider.of<ProductBloc>(context),
-              builder: (context, state) {
-                return TextFormField(
-                  onChanged: (value) {
-                    if (state is ProductListLoadingState) return;
-                    _productBloc.add(SearchProductsEvent(value));
-                  },
-                  autofocus: true,
-                  decoration: InputDecoration(
-                      hintText: "Search ...",
-                      border: InputBorder.none,
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.close),
-                        onPressed: () {
-                          setState(() {
-                            searchMode = false;
-                            _productBloc.add(GetAllProductsEvent());
-                          });
-                        },
-                      )),
-                );
-              }));
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        title: BlocBuilder<ProductBloc, ProductState>(
+            bloc: BlocProvider.of<ProductBloc>(context),
+            builder: (context, state) {
+              return TextFormField(
+                onChanged: (value) {
+                  if (state is ProductListLoadingState) return;
+                  _productBloc.add(SearchProductsEvent(value));
+                },
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: translate(Lz.General_Search),
+                  border: InputBorder.none,
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      setState(() {
+                        searchMode = false;
+                        _productBloc.add(GetAllProductsEvent());
+                      });
+                    },
+                  ),
+                ),
+              );
+            }),
+      );
     else
       return AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Products list"),
+        title: Text(translate(Lz.Product_List_Title)),
         actions: [
           IconButton(
               icon: Icon(Icons.search),

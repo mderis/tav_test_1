@@ -1,0 +1,27 @@
+{
+  "fepco": "فپکو",
+  "modern_shopping_system": "سیستم فروش مدرن",
+  "general": {
+    "add": "اضافه کردن",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "cancel": "بیخیال",
+    "search": "جستجو",
+    "name": "نام",
+    "price": "قیمت",
+    "old_price": "قیمت قدیم",
+    "count": "تعداد",
+    "finished": "تمام شده!",
+    "free": "رایگان"
+  },
+  "product": {
+    "empty_list_message": "محصولی وجود ندارد! برای اضافه کردن محصول جدید از دکمه پایین استفاده کنید",
+    "list_title": "لیست محصولات",
+    "add_product_title": "محصول جدید",
+    "edit_product_title": "ویرایش محصول"
+  },
+  "dialog_text": {
+    "delete_confirmation": "آیا از حذف کردن {name} اطمینان دارید؟",
+    "fill_all_fields": "تمام فیلد ها را پر کنید!"
+  }
+}

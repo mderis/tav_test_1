@@ -1,0 +1,27 @@
+{
+  "fepco": "FEPCO",
+  "modern_shopping_system": "Modern shopping system",
+  "general": {
+    "add": "Add",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "search": "Search",
+    "name": "Name",
+    "price": "Price",
+    "old_price": "Old price",
+    "count": "Count",
+    "finished": "Finished!",
+    "free": "Free"
+  },
+  "product": {
+    "empty_list_message": "Add a new product from the below",
+    "list_title": "Product list",
+    "add_product_title": "Add product",
+    "edit_product_title": "Edit product"
+  },
+  "dialog_text": {
+    "delete_confirmation": "Are you sure you want to delete {name}?",
+    "fill_all_fields": "All fields must be filled!"
+  }
+}

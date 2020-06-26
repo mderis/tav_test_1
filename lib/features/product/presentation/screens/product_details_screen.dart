@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tavtestproject1/core/localization/lz.dart';
 import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
@@ -95,7 +97,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 color: productModel.price == 0 ? Colors.green : Colors.blue),
             child: productModel.price == 0
                 ? Text(
-                    "FREE",
+                    translate(Lz.General_Free),
                     style: TextStyle(color: Colors.white, fontSize: 24),
                   )
                 : Text(
@@ -111,7 +113,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: <Widget>[
               FlatButton(
                 child: Text(
-                  "DELETE",
+                  translate(Lz.General_Delete),
                   style: TextStyle(
                     color: Colors.red[700],
                     fontSize: 18,
@@ -123,12 +125,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          content: Text(
-                              "Are you sure you want to delete ${productModel.name}?"),
+                          content: Text(translate(
+                              Lz.Dialog_Text_Delete_Confirmation,
+                              args: {'name': productModel.name})),
                           actions: <Widget>[
                             FlatButton(
                               child: Text(
-                                "Cancel",
+                                translate(Lz.General_Cancel),
                                 style: TextStyle(color: Colors.black),
                               ),
                               onPressed: () {
@@ -137,7 +140,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                             FlatButton(
                               child: Text(
-                                "Delete",
+                                translate(Lz.General_Delete),
                                 style: TextStyle(color: Colors.red),
                               ),
                               onPressed: () {
@@ -154,7 +157,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               FlatButton(
                 child: Text(
-                  "EDIT",
+                  translate(Lz.General_Edit),
                   style: TextStyle(
                     color: Colors.blue[700],
                     fontSize: 18,
