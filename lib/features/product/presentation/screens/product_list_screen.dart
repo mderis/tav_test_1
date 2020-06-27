@@ -95,11 +95,33 @@ class _MainScreenState extends State<ProductListScreen> {
             ),
           ),
           title: Text(product.name),
-          subtitle: Text(product.count > 0
+          subtitle: Row(
+            children: <Widget>[
+              if (product.oldPrice != null)
+                Text(
+                  product.oldPrice > 0
+                      ? product.oldPrice.toString() + "\$"
+                      : "FREE",
+                  style: TextStyle(
+                      decoration: TextDecoration.lineThrough,
+                      color: Colors.red[200]),
+                ),
+              if (product.oldPrice != null)
+                SizedBox(
+                  width: 12,
+                ),
+              Text(
+                product.price > 0 ? product.price.toString() + "\$" : "FREE",
+                style: TextStyle(
+                    color: (product.price > 0)
+                        ? Colors.blue[400]
+                        : Colors.green[400]),
+              ),
+            ],
+          ),
+          trailing: Text(product.count > 0
               ? translate(Lz.General_Count) + ": " + product.count.toString()
               : translate(Lz.General_Finished)),
-          trailing: Text(
-              product.price > 0 ? product.price.toString() + "\$" : "FREE"),
           onTap: () {
             Navigator.pushNamed(context, '/product/details',
                 arguments: ProductDetailsArgs(product.id));
@@ -120,8 +142,8 @@ class _MainScreenState extends State<ProductListScreen> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    content: Text(
-                        translate(Lz.Dialog_Text_Delete_Confirmation, args: {'name': product.name})),
+                    content: Text(translate(Lz.Dialog_Text_Delete_Confirmation,
+                        args: {'name': product.name})),
                     actions: <Widget>[
                       FlatButton(
                         child: Text(
