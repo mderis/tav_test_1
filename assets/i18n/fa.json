@@ -23,5 +23,11 @@
   "dialog_text": {
     "delete_confirmation": "آیا از حذف کردن {name} اطمینان دارید؟",
     "fill_all_fields": "تمام فیلد ها را پر کنید!"
+  },
+  "settings": {
+    "section_ui_label": "ظاهر",
+    "section_general_label": "عمومی",
+    "item_dark_theme_label": "پوسته تاریک",
+    "item_language_label": "زبان"
   }
 }

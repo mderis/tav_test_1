@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tavtestproject1/features/settings/presentation/screens/settings_screen.dart';
 import 'package:tavtestproject1/features/splash/presentation/screens/splash_screen.dart';
 
 import 'features/product/data/models/product_model.dart';
@@ -24,6 +25,8 @@ class RouteGenerator {
       case '/product/details':
         return MaterialPageRoute(builder: (_) => ProductDetailsScreen(args));
       //---------------------------------------------------------------------//
+      case '/settings':
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
     }
   }
 }

@@ -3,16 +3,14 @@ import 'package:tavtestproject1/features/product/data/models/product_model.dart'
 
 abstract class ProductState extends Equatable {
   const ProductState();
+  @override
+  List<Object> get props => [];
 }
 
 class ProductListEmptyState extends ProductState {
-  @override
-  List<Object> get props => [];
 }
 
 class ProductListLoadingState extends ProductState {
-  @override
-  List<Object> get props => [];
 }
 
 class ProductListLoadedState extends ProductState {

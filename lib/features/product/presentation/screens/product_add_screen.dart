@@ -117,9 +117,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                               .primaryColorLight
                               .withOpacity(.5),
                           child: Icon(
-                            Icons.clear,
-                            color: Colors.red,
-                            size: 45,
+                            Icons.delete,
+                            color: Colors.blue[800],
+                            size: 32,
                           ),
                           padding: EdgeInsets.all(0),
                           shape: CircleBorder(),

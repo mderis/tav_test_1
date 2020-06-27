@@ -46,4 +46,15 @@ class Lz {
 
   static const String Dialog_Text_Fill_All_Fields =
       'dialog_text.fill_all_fields';
+
+  static const String Settings_Section_Ui_Label = 'settings.section_ui_label';
+
+  static const String Settings_Section_General_Label =
+      'settings.section_general_label';
+
+  static const String Settings_Item_Dark_Theme_Label =
+      'settings.item_dark_theme_label';
+
+  static const String Settings_Item_Language_Label =
+      'settings.item_language_label';
 }

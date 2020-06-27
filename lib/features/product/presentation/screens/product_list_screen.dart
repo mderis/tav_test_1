@@ -34,7 +34,7 @@ class _MainScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(context),
+      appBar: _getAppBar(context),
       body: _getProductList(),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToAddScreen,
@@ -188,7 +188,7 @@ class _MainScreenState extends State<ProductListScreen> {
     );
   }
 
-  getAppBar(BuildContext context) {
+  _getAppBar(BuildContext context) {
     if (searchMode)
       return AppBar(
         automaticallyImplyLeading: false,
@@ -229,6 +229,11 @@ class _MainScreenState extends State<ProductListScreen> {
                 setState(() {
                   searchMode = true;
                 });
+              }),
+          IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                Navigator.pushNamed(context, '/settings');
               }),
         ],
       );
