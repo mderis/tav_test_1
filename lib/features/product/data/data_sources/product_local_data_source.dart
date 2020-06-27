@@ -2,7 +2,7 @@ import 'package:sembast/sembast.dart';
 import 'package:tavtestproject1/core/database/app_database.dart';
 import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 
-class LocalDataSource {
+class ProductLocalDataSource {
   Future<Database> get _db async => await AppDatabase.instance.database;
 
   var _store = intMapStoreFactory.store('products');

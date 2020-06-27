@@ -1,10 +1,9 @@
-
-import 'package:tavtestproject1/features/product/data/data_sources/local_data_source.dart';
+import 'package:tavtestproject1/features/product/data/data_sources/product_local_data_source.dart';
 import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 import 'package:tavtestproject1/features/product/domain/repositories/products_repository.dart';
 
 class ProductsRepositoryImpl extends ProductsRepository {
-  LocalDataSource _localDataSource = LocalDataSource();
+  ProductLocalDataSource _localDataSource = ProductLocalDataSource();
 
   @override
   Future<ProductModel> create(ProductModel productModel) async {

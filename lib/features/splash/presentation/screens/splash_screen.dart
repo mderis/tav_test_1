@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tavtestproject1/core/localization/lz.dart';
+import 'package:tavtestproject1/features/settings/data/models/settings_model.dart';
+import 'package:tavtestproject1/features/settings/presentation/bloc/bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,7 +14,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    changeLocale(context, 'fa');
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, '/product/list');
     });
