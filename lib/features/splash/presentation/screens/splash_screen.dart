@@ -25,8 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
         if (userModel == null) {
           await _createUserUseCase(NoParams());
         }
-//        Navigator.pushReplacementNamed(context, '/product/list');
-        Navigator.pushReplacementNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, '/product/list');
+//        Navigator.pushReplacementNamed(context, '/login');
       },
     );
   }

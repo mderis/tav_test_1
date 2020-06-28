@@ -62,4 +62,6 @@ class Lz {
 
   static const String Settings_Item_Language_Label =
       'settings.item_language_label';
+
+  static const String Profile_Edit_Page_Title = 'profile.edit_page_title';
 }

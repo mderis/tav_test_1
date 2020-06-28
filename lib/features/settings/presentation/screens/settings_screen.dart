@@ -28,7 +28,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       bloc: _settingsBloc,
       builder: (context, state) {
         return Scaffold(
-          drawer: MainDrawer(),
           appBar: AppBar(
             title: Text(translate(Lz.Settings_Page_Title)),
           ),

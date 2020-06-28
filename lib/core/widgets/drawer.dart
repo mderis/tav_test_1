@@ -8,6 +8,10 @@ import 'package:tavtestproject1/features/user/data/models/user_model.dart';
 import 'package:tavtestproject1/features/user/presentation/bloc/bloc.dart';
 
 class MainDrawer extends StatefulWidget {
+  final String _routeName;
+
+  MainDrawer(this._routeName);
+
   @override
   _MainDrawerState createState() => _MainDrawerState();
 }
@@ -17,9 +21,9 @@ class _MainDrawerState extends State<MainDrawer> {
 
   @override
   void initState() {
+    super.initState();
     _userBloc = BlocProvider.of<UserBloc>(context);
     _userBloc.add(GetUserEvent());
-    super.initState();
   }
 
   @override
@@ -53,7 +57,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         radius: 15,
                       ),
               ),
-              ..._getListItems(),
+              ..._getListItems(context),
             ],
           ),
         );
@@ -61,17 +65,31 @@ class _MainDrawerState extends State<MainDrawer> {
     );
   }
 
-  List<Widget> _getListItems() {
+  List<Widget> _getListItems(BuildContext context) {
     return [
       ListTile(
-        leading: Icon(Icons.pregnant_woman),
-        title: Text("Edit Profile"),
-        onTap: () {},
+        leading: Icon(Icons.person),
+        title: Text(translate(Lz.Product_Edit_Product_Title)),
+        enabled: widget._routeName != '/profile/edit',
+        onTap: () {
+          Navigator.of(context).popAndPushNamed('/profile/edit');
+        },
       ),
       ListTile(
         leading: Icon(Icons.list),
         title: Text(translate(Lz.Product_List_Title)),
-        onTap: () {},
+        enabled: widget._routeName != '/product/list',
+        onTap: () {
+          Navigator.of(context).popAndPushNamed('/product/list');
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.settings),
+        title: Text(translate(Lz.Settings_Page_Title)),
+        enabled: widget._routeName != '/settings',
+        onTap: () {
+          Navigator.of(context).popAndPushNamed('/settings');
+        },
       ),
     ];
   }

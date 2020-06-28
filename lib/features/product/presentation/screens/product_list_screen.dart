@@ -37,7 +37,7 @@ class _MainScreenState extends State<ProductListScreen> {
     return Scaffold(
       appBar: _getAppBar(context),
       body: _getProductList(),
-      drawer: MainDrawer(),
+      drawer: MainDrawer('/product/list'),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToAddScreen,
         tooltip: translate(Lz.General_Add),

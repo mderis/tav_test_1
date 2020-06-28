@@ -31,5 +31,8 @@
     "section_general_label": "General",
     "item_dark_theme_label": "Dark theme",
     "item_language_label": "Language"
+  },
+  "profile": {
+    "edit_page_title": "Edit profile"
   }
 }

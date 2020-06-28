@@ -31,5 +31,8 @@
     "section_general_label": "عمومی",
     "item_dark_theme_label": "پوسته تاریک",
     "item_language_label": "زبان"
+  },
+  "profile": {
+    "edit_page_title": "ویرایش پروفایل"
   }
 }
