@@ -21,10 +21,12 @@
     "edit_product_title": "Edit product"
   },
   "dialog_text": {
+    "select_language": "Select your language",
     "delete_confirmation": "Are you sure you want to delete {name}?",
     "fill_all_fields": "All fields must be filled!"
   },
   "settings": {
+    "page_title": "Settings",
     "section_ui_label": "User interface",
     "section_general_label": "General",
     "item_dark_theme_label": "Dark theme",

@@ -41,11 +41,16 @@ class Lz {
 
   static const String Product_Edit_Product_Title = 'product.edit_product_title';
 
+  static const String Dialog_Text_Select_Language =
+      'dialog_text.select_language';
+
   static const String Dialog_Text_Delete_Confirmation =
       'dialog_text.delete_confirmation';
 
   static const String Dialog_Text_Fill_All_Fields =
       'dialog_text.fill_all_fields';
+
+  static const String Settings_Page_Title = 'settings.page_title';
 
   static const String Settings_Section_Ui_Label = 'settings.section_ui_label';
 

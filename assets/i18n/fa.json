@@ -21,10 +21,12 @@
     "edit_product_title": "ویرایش محصول"
   },
   "dialog_text": {
+    "select_language": "زبان خود را انتخاب کنید",
     "delete_confirmation": "آیا از حذف کردن {name} اطمینان دارید؟",
     "fill_all_fields": "تمام فیلد ها را پر کنید!"
   },
   "settings": {
+    "page_title": "تنظیمات",
     "section_ui_label": "ظاهر",
     "section_general_label": "عمومی",
     "item_dark_theme_label": "پوسته تاریک",
