@@ -37,7 +37,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     subtitle: 'English',
                     leading: Icon(Icons.language),
                     onTap: () {
-
                       _settingsBloc.add(UpdateSettingsEvent(
                           state.settingsModel..localeString = "en"));
                       print("dd");
@@ -48,8 +47,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     subtitle: 'فارسی',
                     leading: Icon(Icons.language),
                     onTap: () {
-                      _settingsBloc.add(UpdateSettingsEvent(
-                          state.settingsModel..localeString = "fa"));
+                      _settingsBloc.add(
+                        UpdateSettingsEvent(
+                            state.settingsModel..localeString = "fa"),
+                      );
                     },
                   ),
                 ],
@@ -58,8 +59,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: translate(translate(Lz.Settings_Section_Ui_Label)),
                 tiles: [
                   SettingsTile.switchTile(
-                    title: translate(
-                        translate(Lz.Settings_Item_Dark_Theme_Label)),
+                    title:
+                        translate(translate(Lz.Settings_Item_Dark_Theme_Label)),
                     leading: Icon(Icons.face),
                     switchValue: state.settingsModel.isDarkTheme,
                     enabled: true,

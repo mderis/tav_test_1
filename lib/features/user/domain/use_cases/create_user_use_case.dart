@@ -4,22 +4,12 @@ import 'package:tavtestproject1/features/user/data/models/user_model.dart';
 import 'package:tavtestproject1/features/user/data/repositories/user_repository_impl.dart';
 import 'package:tavtestproject1/features/user/domain/repositories/user_repository.dart';
 
-class CreateUserUseCase extends UseCase<UserModel, CreateUserUseCaseParams> {
+class CreateUserUseCase extends UseCase<UserModel, NoParams> {
   UserRepository _userRepository = UserRepositoryImpl();
 
   @override
-  Future<UserModel> call(CreateUserUseCaseParams params) {
+  Future<UserModel> call(NoParams params) {
     return _userRepository.create(
-        UserModel(username: params.username, password: params.username));
+        UserModel(name:"John Doe", username: "admin", password: "admin"));
   }
-}
-
-class CreateUserUseCaseParams extends Equatable {
-  final String username;
-  final String password;
-
-  CreateUserUseCaseParams(this.username, this.password);
-
-  @override
-  List<Object> get props => [username, password];
 }

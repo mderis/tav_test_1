@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/global.dart';
 import 'package:tavtestproject1/core/localization/lz.dart';
+import 'package:tavtestproject1/core/widgets/drawer.dart';
 import 'package:tavtestproject1/features/product/data/models/product_model.dart';
 import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
@@ -36,6 +37,7 @@ class _MainScreenState extends State<ProductListScreen> {
     return Scaffold(
       appBar: _getAppBar(context),
       body: _getProductList(),
+      drawer: MainDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: _goToAddScreen,
         tooltip: translate(Lz.General_Add),
@@ -220,7 +222,6 @@ class _MainScreenState extends State<ProductListScreen> {
       );
     else
       return AppBar(
-        automaticallyImplyLeading: false,
         title: Text(translate(Lz.Product_List_Title)),
         actions: [
           IconButton(
