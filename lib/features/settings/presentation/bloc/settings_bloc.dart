@@ -23,7 +23,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     } else if (event is UpdateSettingsEvent) {
       SettingsModel settingsModel = await _editSettingsUseCase(
           EditSettingsUseCaseParams(event.settingsModel));
-      yield UpdateSettingState(settingsModel);
+      yield SettingsUpdatedState(settingsModel);
     }
   }
 }

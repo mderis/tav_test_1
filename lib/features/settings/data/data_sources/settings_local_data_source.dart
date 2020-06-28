@@ -25,7 +25,7 @@ class SettingsLocaleDataSource {
   }
 
   Future<SettingsModel> edit(SettingsModel settingsModel) async {
-    Finder finder = Finder(filter: Filter.notNull("locale_string"));
+    Finder finder = Finder();
     await _store.update(await _db, settingsModel.toJson(), finder: finder);
     return settingsModel;
   }

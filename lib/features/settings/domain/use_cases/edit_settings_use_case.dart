@@ -8,7 +8,6 @@ import 'package:tavtestproject1/features/settings/domain/use_cases/get_settings_
 class EditSettingsUseCase
     extends UseCase<SettingsModel, EditSettingsUseCaseParams> {
   SettingsRepository _settingsRepository = SettingsRepositoryImpl();
-  GetSettingsUseCase _getSettingsUseCase = GetSettingsUseCase();
 
   @override
   Future<SettingsModel> call(EditSettingsUseCaseParams params) async {

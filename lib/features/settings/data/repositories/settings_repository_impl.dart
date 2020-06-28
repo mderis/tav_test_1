@@ -12,8 +12,9 @@ class SettingsRepositoryImpl extends SettingsRepository {
   }
 
   @override
-  Future<SettingsModel> edit(SettingsModel settingsModel) {
-    return _settingsLocaleDataSource.edit(settingsModel);
+  Future<SettingsModel> edit(SettingsModel settingsModel) async {
+    settingsModel = await _settingsLocaleDataSource.edit(settingsModel);
+    return settingsModel;
   }
 
   @override

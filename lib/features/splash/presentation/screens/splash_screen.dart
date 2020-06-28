@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tavtestproject1/core/localization/lz.dart';
-import 'package:tavtestproject1/features/settings/data/models/settings_model.dart';
-import 'package:tavtestproject1/features/settings/presentation/bloc/bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
