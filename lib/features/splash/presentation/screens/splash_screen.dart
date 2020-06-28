@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tavtestproject1/core/localization/lz.dart';
+import 'package:tavtestproject1/core/parents/use_case.dart';
+import 'package:tavtestproject1/features/user/data/models/user_model.dart';
+import 'package:tavtestproject1/features/user/domain/use_cases/create_user_use_case.dart';
+import 'package:tavtestproject1/features/user/domain/use_cases/get_user_use_case.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -8,12 +12,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  CreateUserUseCase _createUserUseCase = CreateUserUseCase();
+  GetUserUseCase _getUserUseCase = GetUserUseCase();
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/login');
-    });
+    Future.delayed(
+      Duration(seconds: 3),
+      () async {
+        UserModel userModel = await _getUserUseCase(NoParams());
+        if (userModel == null) {
+          await _createUserUseCase(CreateUserUseCaseParams("admin", "admin"));
+        }
+        Navigator.pushReplacementNamed(context, '/login');
+      },
+    );
   }
 
   @override

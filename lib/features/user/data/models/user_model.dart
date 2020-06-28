@@ -7,9 +7,9 @@ class UserModel extends Equatable {
   String avatarPath;
 
   UserModel({
-    this.name = 'Moslem',
-    this.username = 'admin',
-    this.password = "admin",
+    this.name = '',
+    this.username = '',
+    this.password = '',
     this.avatarPath,
   });
 

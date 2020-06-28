@@ -9,9 +9,6 @@ class GetUserUseCase extends UseCase<UserModel, NoParams> {
   @override
   Future<UserModel> call(NoParams params) async {
     UserModel userModel = await _userRepository.get();
-    if (userModel == null) {
-      userModel = await _userRepository.create(UserModel());
-    }
     return userModel;
   }
 }
