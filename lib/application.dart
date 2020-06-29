@@ -33,6 +33,7 @@ class _ApplicationState extends State<Application> {
           }
         },
         builder: (context, state) {
+          //  TODO:
           if (state is SettingsUpdatedState) {
             return LocalizationProvider(
               state: LocalizationProvider.of(context).state,

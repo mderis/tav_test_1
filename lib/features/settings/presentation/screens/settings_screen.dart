@@ -20,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     _settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    //  TODO: state for get
     _settingsBloc.add(GetSettingsEvent());
     super.initState();
   }
