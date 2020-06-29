@@ -8,7 +8,7 @@ class SettingsModel extends Equatable {
   SettingsModel(
       {this.localeString = 'en',
       this.isDarkTheme = false,
-      this.primaryColor = "#000000"});
+      this.primaryColor = "#ff0000"});
 
   static SettingsModel fromJson(Map<String, dynamic> json) {
     return SettingsModel(

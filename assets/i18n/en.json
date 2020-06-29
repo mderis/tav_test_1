@@ -2,12 +2,14 @@
   "fepco": "FEPCO",
   "modern_shopping_system": "Modern shopping system",
   "general": {
+    "ok": "OK",
     "add": "Add",
     "delete": "Delete",
     "edit": "Edit",
     "cancel": "Cancel",
     "search": "Search",
     "name": "Name",
+    "login": "Login",
     "username": "Username",
     "password": "Password",
     "old_password": "Old password",
@@ -28,7 +30,8 @@
   "dialog_text": {
     "select_language": "Select your language",
     "delete_confirmation": "Are you sure you want to delete {name}?",
-    "fill_all_fields": "All fields must be filled!"
+    "fill_all_fields": "All fields must be filled!",
+    "pick_a_color": "Pick a color"
   },
   "settings": {
     "page_title": "Settings",
@@ -45,6 +48,7 @@
   },
   "error": {
     "empty_field_message": "This field can not be empty",
-    "wrong_old_password": "Old password is wrong"
+    "wrong_old_password": "Old password is wrong",
+    "wrong_credentials": "Wrong credentials"
   }
 }

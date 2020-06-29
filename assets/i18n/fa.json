@@ -2,12 +2,14 @@
   "fepco": "فپکو",
   "modern_shopping_system": "سیستم فروش مدرن",
   "general": {
+    "ok": "خب",
     "add": "اضافه کردن",
     "delete": "حذف",
     "edit": "ویرایش",
     "cancel": "بیخیال",
     "search": "جستجو",
     "name": "نام",
+    "login": "ورود",
     "username": "نام کاربری",
     "password": "پسورد",
     "old_password": "پسورد قدیمی",
@@ -28,7 +30,8 @@
   "dialog_text": {
     "select_language": "زبان خود را انتخاب کنید",
     "delete_confirmation": "آیا از حذف کردن {name} اطمینان دارید؟",
-    "fill_all_fields": "تمام فیلد ها را پر کنید!"
+    "fill_all_fields": "تمام فیلد ها را پر کنید!",
+    "pick_a_color": "یک رنگ انتخاب بکن"
   },
   "settings": {
     "page_title": "تنظیمات",
@@ -46,6 +49,7 @@
   },
   "error": {
     "empty_field_message": "این فیلد نمیتواند خالی باشد",
-    "wrong_old_password": "پسورد قدیمی اشتباه وارد شده"
+    "wrong_old_password": "پسورد قدیمی اشتباه وارد شده",
+    "wrong_credentials": "نام کاربری یا رمز عبور اشتباه است"
   }
 }

@@ -11,6 +11,8 @@ class Lz {
 
   static const String Modern_Shopping_System = 'modern_shopping_system';
 
+  static const String General_Ok = 'general.ok';
+
   static const String General_Add = 'general.add';
 
   static const String General_Delete = 'general.delete';
@@ -22,6 +24,8 @@ class Lz {
   static const String General_Search = 'general.search';
 
   static const String General_Name = 'general.name';
+
+  static const String General_Login = 'general.login';
 
   static const String General_Username = 'general.username';
 
@@ -61,6 +65,8 @@ class Lz {
   static const String Dialog_Text_Fill_All_Fields =
       'dialog_text.fill_all_fields';
 
+  static const String Dialog_Text_Pick_A_Color = 'dialog_text.pick_a_color';
+
   static const String Settings_Page_Title = 'settings.page_title';
 
   static const String Settings_Section_Ui_Label = 'settings.section_ui_label';
@@ -88,4 +94,6 @@ class Lz {
   static const String Error_Empty_Field_Message = 'error.empty_field_message';
 
   static const String Error_Wrong_Old_Password = 'error.wrong_old_password';
+
+  static const String Error_Wrong_Credentials = 'error.wrong_credentials';
 }

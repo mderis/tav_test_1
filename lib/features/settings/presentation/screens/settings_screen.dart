@@ -81,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       showDialog(
                         context: context,
                         child: AlertDialog(
-                          title: const Text('Pick a color!'),
+                          title: Text(translate(Lz.Dialog_Text_Pick_A_Color)),
                           content: SingleChildScrollView(
                             child: ColorPicker(
                               pickerColor: HexColor.fromHex(
@@ -103,7 +103,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           actions: <Widget>[
                             FlatButton(
-                              child: const Text('Got it'),
+                              child: Text(translate(Lz.General_Ok)),
                               onPressed: () {
                                 SettingsModel newSettings = state.settingsModel;
                                 newSettings.primaryColor = pickedColor;
