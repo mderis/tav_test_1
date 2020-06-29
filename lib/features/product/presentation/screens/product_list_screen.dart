@@ -53,9 +53,13 @@ class _MainScreenState extends State<ProductListScreen> {
         if (state is ProductListLoadedState) {
           if (state.productList.length == 0) {
             return Center(
-              child: Text(
-                translate(Lz.Product_Empty_List_Message),
-                style: TextStyle(color: Colors.black26),
+              child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Text(
+                  translate(Lz.Product_Empty_List_Message),
+                  style: TextStyle(color: Colors.black26),
+                  textAlign: TextAlign.center,
+                ),
               ),
             );
           } else {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:tavtestproject1/core/extensions/hex_color.dart';
 import 'package:tavtestproject1/core/localization/lz.dart';
-import 'package:tavtestproject1/core/widgets/drawer.dart';
 import 'package:tavtestproject1/features/settings/data/models/settings_model.dart';
 import 'package:tavtestproject1/features/settings/presentation/bloc/bloc.dart';
 
@@ -14,6 +15,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   SettingsBloc _settingsBloc;
+  String pickedColor;
 
   @override
   void initState() {
@@ -66,6 +68,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       SettingsModel newSettings = state.settingsModel;
                       newSettings.isDarkTheme = value;
                       _settingsBloc.add(UpdateSettingsEvent(newSettings));
+                    },
+                  ),
+                  SettingsTile(
+                    title: translate(Lz.Settings_Item_Primary_Color_Label),
+                    trailing: CircleAvatar(
+                      backgroundColor:
+                          HexColor.fromHex(state.settingsModel.primaryColor),
+                    ),
+                    leading: Icon(Icons.color_lens),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        child: AlertDialog(
+                          title: const Text('Pick a color!'),
+                          content: SingleChildScrollView(
+                            child: ColorPicker(
+                              pickerColor: HexColor.fromHex(
+                                  state.settingsModel.primaryColor),
+                              onColorChanged: (color) {
+                                pickedColor = color.toHex();
+                              },
+                              colorPickerWidth: 300.0,
+                              pickerAreaHeightPercent: 0.7,
+                              enableAlpha: true,
+                              displayThumbColor: true,
+                              showLabel: true,
+                              paletteType: PaletteType.hsv,
+                              pickerAreaBorderRadius: const BorderRadius.only(
+                                topLeft: const Radius.circular(2.0),
+                                topRight: const Radius.circular(2.0),
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: const Text('Got it'),
+                              onPressed: () {
+                                SettingsModel newSettings = state.settingsModel;
+                                newSettings.primaryColor = pickedColor;
+                                _settingsBloc
+                                    .add(UpdateSettingsEvent(newSettings));
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   ),
                 ],

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tavtestproject1/features/settings/data/models/settings_model.dart';
+import 'package:tavtestproject1/core/extensions/hex_color.dart';
 import 'package:tavtestproject1/features/settings/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class Application extends StatefulWidget {
   @override
@@ -18,6 +18,7 @@ class _ApplicationState extends State<Application> {
   void initState() {
     super.initState();
     _settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    _settingsBloc.add(GetSettingsEvent());
   }
 
   @override
@@ -48,7 +49,9 @@ class _ApplicationState extends State<Application> {
                 theme: ThemeData(
                     primarySwatch: Colors.blue,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
-                    fontFamily: "IranSans"),
+                    fontFamily: "IranSans",
+                    primaryColor:
+                        HexColor.fromHex(state.settingsModel.primaryColor)),
                 darkTheme: ThemeData.dark(),
                 themeMode: state.settingsModel.isDarkTheme
                     ? ThemeMode.dark

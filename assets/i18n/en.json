@@ -35,7 +35,8 @@
     "section_ui_label": "User interface",
     "section_general_label": "General",
     "item_dark_theme_label": "Dark theme",
-    "item_language_label": "Language"
+    "item_language_label": "Language",
+    "item_primary_color_label": "Primary color"
   },
   "profile": {
     "edit_page_title": "Edit profile",

@@ -35,7 +35,8 @@
     "section_ui_label": "ظاهر",
     "section_general_label": "عمومی",
     "item_dark_theme_label": "پوسته تاریک",
-    "item_language_label": "زبان"
+    "item_language_label": "زبان",
+    "item_primary_color_label": "رنگ اصلی"
   },
   "profile": {
     "edit_page_title": "ویرایش پروفایل",

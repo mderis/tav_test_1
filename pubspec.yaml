@@ -34,6 +34,8 @@ dependencies:
   settings_ui: ^0.3.0
   # Awesome fonts  #  https://pub.dev/packages/font_awesome_flutter
   font_awesome_flutter: 8.8.1
+  # Color picker  #  https://pub.dev/packages/flutter_colorpicker
+  flutter_colorpicker: ^0.3.4
 
   cupertino_icons: ^0.1.3
 

@@ -74,6 +74,9 @@ class Lz {
   static const String Settings_Item_Language_Label =
       'settings.item_language_label';
 
+  static const String Settings_Item_Primary_Color_Label =
+      'settings.item_primary_color_label';
+
   static const String Profile_Edit_Page_Title = 'profile.edit_page_title';
 
   static const String Profile_Edit_Page_Details_Title =
