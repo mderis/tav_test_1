@@ -8,6 +8,11 @@
     "cancel": "Cancel",
     "search": "Search",
     "name": "Name",
+    "username": "Username",
+    "password": "Password",
+    "old_password": "Old password",
+    "new_password": "New password",
+    "repeat_new_password": "Repeat new password",
     "price": "Price",
     "old_price": "Old price",
     "count": "Count",
@@ -33,6 +38,12 @@
     "item_language_label": "Language"
   },
   "profile": {
-    "edit_page_title": "Edit profile"
+    "edit_page_title": "Edit profile",
+    "edit_page_details_title": "Profile details",
+    "edit_page_password_title": "Password"
+  },
+  "error": {
+    "empty_field_message": "This field can not be empty",
+    "wrong_old_password": "Old password is wrong"
   }
 }

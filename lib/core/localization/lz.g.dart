@@ -23,6 +23,17 @@ class Lz {
 
   static const String General_Name = 'general.name';
 
+  static const String General_Username = 'general.username';
+
+  static const String General_Password = 'general.password';
+
+  static const String General_Old_Password = 'general.old_password';
+
+  static const String General_New_Password = 'general.new_password';
+
+  static const String General_Repeat_New_Password =
+      'general.repeat_new_password';
+
   static const String General_Price = 'general.price';
 
   static const String General_Old_Price = 'general.old_price';
@@ -64,4 +75,14 @@ class Lz {
       'settings.item_language_label';
 
   static const String Profile_Edit_Page_Title = 'profile.edit_page_title';
+
+  static const String Profile_Edit_Page_Details_Title =
+      'profile.edit_page_details_title';
+
+  static const String Profile_Edit_Page_Password_Title =
+      'profile.edit_page_password_title';
+
+  static const String Error_Empty_Field_Message = 'error.empty_field_message';
+
+  static const String Error_Wrong_Old_Password = 'error.wrong_old_password';
 }

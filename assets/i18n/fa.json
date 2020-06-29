@@ -8,6 +8,11 @@
     "cancel": "بیخیال",
     "search": "جستجو",
     "name": "نام",
+    "username": "نام کاربری",
+    "password": "پسورد",
+    "old_password": "پسورد قدیمی",
+    "new_password": "پسورد جدید",
+    "repeat_new_password": "تکرار پسورد جدید",
     "price": "قیمت",
     "old_price": "قیمت قدیم",
     "count": "تعداد",
@@ -33,6 +38,13 @@
     "item_language_label": "زبان"
   },
   "profile": {
-    "edit_page_title": "ویرایش پروفایل"
+    "edit_page_title": "ویرایش پروفایل",
+    "edit_page_details_title": "اطلاعات کاربری",
+    "edit_page_password_title": "پسورد"
+
+  },
+  "error": {
+    "empty_field_message": "این فیلد نمیتواند خالی باشد",
+    "wrong_old_password": "پسورد قدیمی اشتباه وارد شده"
   }
 }

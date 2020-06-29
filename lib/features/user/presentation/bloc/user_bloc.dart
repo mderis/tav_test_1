@@ -36,6 +36,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       UserModel userModel =
           await _editUserUseCase(EditUserUseCaseParams(event.userModel));
       yield UserUpdatedState(userModel);
+    } else if (event is UpdateUserPasswordEvent) {
+      UserModel userModel = await _getUserUseCase(NoParams());
+      if (userModel.password == event.oldPassword) {
+        userModel.password = event.newPassword;
+        add(UpdateUserEvent(userModel));
+        yield UserPasswordUpdatedState(true);
+      } else {
+        yield UserPasswordUpdatedState(false);
+      }
     }
   }
 }

@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   # Settings UI  #  https://github.com/yako-dev/flutter-settings-ui
   settings_ui: ^0.3.0
+  # Awesome fonts  #  https://pub.dev/packages/font_awesome_flutter
+  font_awesome_flutter: 8.8.1
 
   cupertino_icons: ^0.1.3
 

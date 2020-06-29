@@ -15,6 +15,15 @@ class UserUpdatedState extends UserState {
   List<Object> get props => [userModel, ageNabasheEquatabilityKarNemikone];
 }
 
+class UserPasswordUpdatedState extends UserState {
+  final bool isUpdated;
+
+  UserPasswordUpdatedState(this.isUpdated);
+
+  @override
+  List<Object> get props => [isUpdated];
+}
+
 class UserLoginSuccessedState extends UserState {
   final UserModel userModel;
   final _ageNabasheEquatabilityKarNemikone = DateTime.now().toString();

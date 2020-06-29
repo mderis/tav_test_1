@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tavtestproject1/features/settings/presentation/screens/settings_screen.dart';
 import 'package:tavtestproject1/features/splash/presentation/screens/splash_screen.dart';
 import 'package:tavtestproject1/features/user/presentation/screens/login_screen.dart';
+import 'package:tavtestproject1/features/user/presentation/screens/profile_edit_details_screen.dart';
 
 import 'features/product/data/models/product_model.dart';
 import 'features/product/presentation/screens/product_add_screen.dart';
 import 'features/product/presentation/screens/product_details_screen.dart';
 import 'features/product/presentation/screens/product_list_screen.dart';
+import 'features/user/presentation/screens/profile_edit_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -16,8 +18,11 @@ class RouteGenerator {
       //---------------------------------------------------------------------//
       case '/splash':
         return MaterialPageRoute(builder: (_) => SplashScreen());
+      //---------------------------------------------------------------------//
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
+      case '/profile/edit':
+        return MaterialPageRoute(builder: (_) => ProfileEditScreen());
       //---------------------------------------------------------------------//
       case '/product/list':
         return MaterialPageRoute(builder: (_) => ProductListScreen());

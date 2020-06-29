@@ -28,3 +28,13 @@ class UpdateUserEvent extends UserEvent {
   @override
   List<Object> get props => [userModel];
 }
+
+class UpdateUserPasswordEvent extends UserEvent {
+  final String oldPassword;
+  final String newPassword;
+
+  UpdateUserPasswordEvent(this.oldPassword, this.newPassword);
+
+  @override
+  List<Object> get props => [oldPassword, newPassword];
+}

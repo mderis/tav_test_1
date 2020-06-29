@@ -48,7 +48,9 @@ class _MainDrawerState extends State<MainDrawer> {
                                 ? Colors.blue
                                 : Colors.white,
                         child: Text(
-                          userModel.name.substring(0, 1),
+                          userModel.name.length > 0
+                              ? userModel.name.substring(0, 1)
+                              : "?",
                           style: TextStyle(fontSize: 40.0),
                         ),
                       )
@@ -69,7 +71,7 @@ class _MainDrawerState extends State<MainDrawer> {
     return [
       ListTile(
         leading: Icon(Icons.person),
-        title: Text(translate(Lz.Product_Edit_Product_Title)),
+        title: Text(translate(Lz.Profile_Edit_Page_Title)),
         enabled: widget._routeName != '/profile/edit',
         onTap: () {
           Navigator.of(context).popAndPushNamed('/profile/edit');
