@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     _userBloc = BlocProvider.of<UserBloc>(context);
-    _userBloc.add(GetUserEvent());
+    _userBloc.add(GetOrCreateUserEvent());
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocConsumer<UserBloc, UserState>(
         bloc: _userBloc,
         listener: (context, state) {
-          if (state is UserLoginSuccessedState) {
+          if (state is UserLoginSucceedState) {
             Navigator.pushReplacementNamed(context, '/product/list');
           } else if (state is UserLoginFailedState) {
             Scaffold.of(context).showSnackBar(

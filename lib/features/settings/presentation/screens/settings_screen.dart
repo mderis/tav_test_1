@@ -20,8 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     _settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    //  TODO: state for get
-    _settingsBloc.add(GetSettingsEvent());
+    _settingsBloc.add(PrepareSettingsEvent());
     super.initState();
   }
 
@@ -128,7 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   SimpleDialog _changeLanguageDialog(
-      SettingsBloc settingsBloc, SettingsUpdatedState state) {
+      SettingsBloc settingsBloc, SettingsReadyToUseState state) {
     return SimpleDialog(
       title: Text(translate(Lz.Dialog_Text_Select_Language)),
       children: <Widget>[

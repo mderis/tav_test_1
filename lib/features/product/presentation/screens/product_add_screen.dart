@@ -80,7 +80,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      InkWell(
+                      OutlineButton(
+                        borderSide: BorderSide.none,
                         child: SizedBox(
                           width: 200,
                           height: 200,
@@ -94,7 +95,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                             radius: 15,
                           ),
                         ),
-                        onTap: () async {
+                        onPressed: () async {
                           final pickedFile = await ImagePicker()
                               .getImage(source: ImageSource.gallery);
                           setState(() {
@@ -102,27 +103,30 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           });
                         },
                       ),
-                      Positioned(
-                        left: 0,
-                        right: 150,
-                        bottom: 0,
-                        child: FlatButton(
-                          onPressed: () {
-                            setState(() {
-                              widget.productModel.imagePath = null;
-                            });
-                            ;
-                          },
-                          color: Theme.of(context)
-                              .primaryColorLight
-                              .withOpacity(.5),
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.blue[800],
-                            size: 32,
+                      Visibility(
+                        visible: widget.productModel.imagePath != null,
+                        child: Positioned(
+                          left: 0,
+                          right: 150,
+                          bottom: 0,
+                          child: FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.productModel.imagePath = null;
+                              });
+                              ;
+                            },
+                            color: Theme.of(context)
+                                .primaryColorLight
+                                .withOpacity(.5),
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.blue[800],
+                              size: 32,
+                            ),
+                            padding: EdgeInsets.all(0),
+                            shape: CircleBorder(),
                           ),
-                          padding: EdgeInsets.all(0),
-                          shape: CircleBorder(),
                         ),
                       )
                     ],

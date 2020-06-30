@@ -50,6 +50,10 @@
   "error": {
     "empty_field_message": "این فیلد نمیتواند خالی باشد",
     "wrong_old_password": "پسورد قدیمی اشتباه وارد شده",
+    "passwords_dont_match": "کلمه عبور جدید با تکرارش برابر نیست",
     "wrong_credentials": "نام کاربری یا رمز عبور اشتباه است"
+  },
+  "about_us": {
+    "title": "درباره ما"
   }
 }

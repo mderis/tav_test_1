@@ -18,41 +18,34 @@ class _ApplicationState extends State<Application> {
   void initState() {
     super.initState();
     _settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    _settingsBloc.add(GetSettingsEvent());
+    _settingsBloc.add(PrepareSettingsEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    var localizationDelegate = LocalizedApp.of(context).delegate;
-
     return BlocConsumer<SettingsBloc, SettingsState>(
         bloc: _settingsBloc,
         listener: (context, state) {
-          if (state is SettingsUpdatedState) {
+          if (state is SettingsReadyToUseState) {
             changeLocale(context, state.settingsModel.localeString);
           }
         },
         builder: (context, state) {
-          //  TODO:
-          if (state is SettingsUpdatedState) {
+          if (state is SettingsReadyToUseState) {
             return LocalizationProvider(
               state: LocalizationProvider.of(context).state,
               child: MaterialApp(
                 title: 'Flutter Demo',
-                localizationsDelegates: [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  localizationDelegate,
-                ],
-                supportedLocales: localizationDelegate.supportedLocales,
+                localizationsDelegates: _getLocalizationDelegates(),
+                supportedLocales: _getLocalizationDelegate().supportedLocales,
                 locale: Locale(state.settingsModel.localeString),
                 theme: ThemeData(
-                    primarySwatch: Colors.blue,
-                    visualDensity: VisualDensity.adaptivePlatformDensity,
-                    fontFamily: "IranSans",
-                    primaryColor:
-                        HexColor.fromHex(state.settingsModel.primaryColor)),
+                  primarySwatch: Colors.blue,
+                  visualDensity: VisualDensity.adaptivePlatformDensity,
+                  fontFamily: "IranSans",
+                  primaryColor:
+                      HexColor.fromHex(state.settingsModel.primaryColor),
+                ),
                 darkTheme: ThemeData.dark(),
                 themeMode: state.settingsModel.isDarkTheme
                     ? ThemeMode.dark
@@ -62,6 +55,17 @@ class _ApplicationState extends State<Application> {
               ),
             );
           }
+          return null;
         });
   }
+
+  LocalizationDelegate _getLocalizationDelegate() =>
+      LocalizedApp.of(context).delegate;
+
+  List<LocalizationsDelegate> _getLocalizationDelegates() => [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        _getLocalizationDelegate(),
+      ];
 }

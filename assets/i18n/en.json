@@ -49,6 +49,10 @@
   "error": {
     "empty_field_message": "This field can not be empty",
     "wrong_old_password": "Old password is wrong",
+    "passwords_dont_match": "Passwords Don't match",
     "wrong_credentials": "Wrong credentials"
+  },
+  "about_us": {
+    "title": "About us"
   }
 }

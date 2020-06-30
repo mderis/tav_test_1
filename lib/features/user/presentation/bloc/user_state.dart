@@ -5,11 +5,11 @@ abstract class UserState extends Equatable {
   const UserState();
 }
 
-class UserUpdatedState extends UserState {
+class UserReadyToUseState extends UserState {
   final UserModel userModel;
   final ageNabasheEquatabilityKarNemikone = DateTime.now().toString();
 
-  UserUpdatedState(this.userModel);
+  UserReadyToUseState(this.userModel);
 
   @override
   List<Object> get props => [userModel, ageNabasheEquatabilityKarNemikone];
@@ -24,11 +24,11 @@ class UserPasswordUpdatedState extends UserState {
   List<Object> get props => [isUpdated];
 }
 
-class UserLoginSuccessedState extends UserState {
+class UserLoginSucceedState extends UserState {
   final UserModel userModel;
   final _ageNabasheEquatabilityKarNemikone = DateTime.now().toString();
 
-  UserLoginSuccessedState(this.userModel);
+  UserLoginSucceedState(this.userModel);
 
   @override
   List<Object> get props => [userModel, _ageNabasheEquatabilityKarNemikone];

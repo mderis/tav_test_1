@@ -22,7 +22,7 @@ class _ProfileEditDetailsScreenState extends State<ProfileEditDetailsScreen> {
   void initState() {
     super.initState();
     _userBloc = BlocProvider.of<UserBloc>(context);
-    _userBloc.add(GetUserEvent());
+    _userBloc.add(GetOrCreateUserEvent());
   }
 
   @override
@@ -30,14 +30,13 @@ class _ProfileEditDetailsScreenState extends State<ProfileEditDetailsScreen> {
     return BlocConsumer<UserBloc, UserState>(
       bloc: _userBloc,
       listener: (context, state) {
-        if (state is UserUpdatedState)
+        if (state is UserReadyToUseState)
           setState(() {
             _userModel = state.userModel;
           });
       },
-//      buildWhen: (oldState, newState)=>false,
       builder: (context, state) {
-        if (state is UserUpdatedState) {
+        if (state is UserReadyToUseState) {
           return Scaffold(
             body: Container(
               padding: EdgeInsets.all(32),
@@ -48,7 +47,8 @@ class _ProfileEditDetailsScreenState extends State<ProfileEditDetailsScreen> {
                     Stack(
                       alignment: Alignment.center,
                       children: [
-                        InkWell(
+                        OutlineButton(
+                          borderSide: BorderSide.none,
                           child: SizedBox(
                             width: 200,
                             height: 200,
@@ -60,7 +60,7 @@ class _ProfileEditDetailsScreenState extends State<ProfileEditDetailsScreen> {
                               radius: 15,
                             ),
                           ),
-                          onTap: () async {
+                          onPressed: () async {
                             final pickedFile = await ImagePicker()
                                 .getImage(source: ImageSource.gallery);
                             setState(() {
@@ -68,27 +68,30 @@ class _ProfileEditDetailsScreenState extends State<ProfileEditDetailsScreen> {
                             });
                           },
                         ),
-                        Positioned(
-                          left: 0,
-                          right: 150,
-                          bottom: 0,
-                          child: FlatButton(
-                            onPressed: () {
-                              setState(() {
-                                _userModel.avatarPath = null;
-                              });
-                              ;
-                            },
-                            color: Theme.of(context)
-                                .primaryColorLight
-                                .withOpacity(.5),
-                            child: Icon(
-                              Icons.delete,
-                              color: Colors.blue[800],
-                              size: 32,
+                        Visibility(
+                          visible: _userModel.avatarPath != null,
+                          child: Positioned(
+                            left: 0,
+                            right: 150,
+                            bottom: 0,
+                            child: FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  _userModel.avatarPath = null;
+                                });
+                                ;
+                              },
+                              color: Theme.of(context)
+                                  .primaryColorLight
+                                  .withOpacity(.5),
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.blue[800],
+                                size: 32,
+                              ),
+                              padding: EdgeInsets.all(0),
+                              shape: CircleBorder(),
                             ),
-                            padding: EdgeInsets.all(0),
-                            shape: CircleBorder(),
                           ),
                         )
                       ],

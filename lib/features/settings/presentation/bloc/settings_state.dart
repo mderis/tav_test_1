@@ -5,11 +5,11 @@ abstract class SettingsState extends Equatable {
   const SettingsState();
 }
 
-class SettingsUpdatedState extends SettingsState {
+class SettingsReadyToUseState extends SettingsState {
   final SettingsModel settingsModel;
   final ageNabasheEquatabilityKarNemikone = DateTime.now().toString();
 
-  SettingsUpdatedState(this.settingsModel);
+  SettingsReadyToUseState(this.settingsModel);
 
   @override
   List<Object> get props => [settingsModel, ageNabasheEquatabilityKarNemikone];

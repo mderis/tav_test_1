@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tavtestproject1/core/localization/lz.dart';
-import 'package:tavtestproject1/core/parents/use_case.dart';
-import 'package:tavtestproject1/features/user/data/models/user_model.dart';
-import 'package:tavtestproject1/features/user/domain/use_cases/create_user_use_case.dart';
-import 'package:tavtestproject1/features/user/domain/use_cases/get_user_use_case.dart';
+import 'package:tavtestproject1/features/user/presentation/bloc/bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,65 +10,74 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  CreateUserUseCase _createUserUseCase = CreateUserUseCase();
-  GetUserUseCase _getUserUseCase = GetUserUseCase();
+  UserBloc _userBloc;
 
   @override
   void initState() {
     super.initState();
-    //TODO
+    _userBloc = BlocProvider.of<UserBloc>(context);
     Future.delayed(
       Duration(seconds: 3),
       () async {
-        UserModel userModel = await _getUserUseCase(NoParams());
-        if (userModel == null) {
-          await _createUserUseCase(NoParams());
-        }
-        Navigator.pushReplacementNamed(context, '/product/list');
-//        Navigator.pushReplacementNamed(context, '/login');
+        _userBloc.add(GetOrCreateUserEvent());
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Image.asset(
-            'assets/images/bg.png',
-            repeat: ImageRepeat.repeat,
+    return BlocConsumer(
+      bloc: _userBloc,
+      listener: (context, state) {
+        if (state is UserReadyToUseState) {
+          Navigator.pushReplacementNamed(context, '/product/list');
+//        Navigator.pushReplacementNamed(context, '/login');
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/bg.png',
+                repeat: ImageRepeat.repeat,
+              ),
+              _getTextWidgets()
+            ],
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    translate(Lz.Fepco),
-                    style: TextStyle(fontSize: 64),
-                  ),
-                  decoration: _getTextBgDecoration(),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                Container(
-                  child: Text(
-                    translate(Lz.Modern_Shopping_System),
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  decoration: _getTextBgDecoration(),
-                ),
-                SizedBox(
-                  height: 96,
-                ),
-                CircularProgressIndicator()
-              ],
+        );
+      },
+    );
+  }
+
+  _getTextWidgets() {
+    return Align(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            child: Text(
+              translate(Lz.Fepco),
+              style: TextStyle(fontSize: 64),
             ),
-          )
+            decoration: _getTextBgDecoration(),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Container(
+            child: Text(
+              translate(Lz.Modern_Shopping_System),
+              style: TextStyle(fontSize: 24),
+            ),
+            decoration: _getTextBgDecoration(),
+          ),
+          SizedBox(
+            height: 96,
+          ),
+          CircularProgressIndicator()
         ],
       ),
     );

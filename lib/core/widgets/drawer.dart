@@ -23,7 +23,7 @@ class _MainDrawerState extends State<MainDrawer> {
   void initState() {
     super.initState();
     _userBloc = BlocProvider.of<UserBloc>(context);
-    _userBloc.add(GetUserEvent());
+    _userBloc.add(GetOrCreateUserEvent());
   }
 
   @override
@@ -31,10 +31,10 @@ class _MainDrawerState extends State<MainDrawer> {
     return BlocBuilder<UserBloc, UserState>(
       bloc: _userBloc,
       condition: (previousState, newState) {
-        return newState is UserUpdatedState;
+        return newState is UserReadyToUseState;
       },
       builder: (context, state) {
-        UserModel userModel = (state as UserUpdatedState).userModel;
+        UserModel userModel = (state as UserReadyToUseState).userModel;
         return Drawer(
           child: ListView(
             children: <Widget>[

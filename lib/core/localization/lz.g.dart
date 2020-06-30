@@ -95,5 +95,9 @@ class Lz {
 
   static const String Error_Wrong_Old_Password = 'error.wrong_old_password';
 
+  static const String Error_Passwords_Dont_Match = 'error.passwords_dont_match';
+
   static const String Error_Wrong_Credentials = 'error.wrong_credentials';
+
+  static const String About_Us_Title = 'about_us.title';
 }

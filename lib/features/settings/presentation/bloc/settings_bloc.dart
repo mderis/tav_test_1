@@ -11,19 +11,19 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   EditSettingsUseCase _editSettingsUseCase = EditSettingsUseCase();
 
   @override
-  SettingsState get initialState => SettingsUpdatedState(SettingsModel.getDefault());
+  SettingsState get initialState => SettingsReadyToUseState(SettingsModel.getDefault());
 
   @override
   Stream<SettingsState> mapEventToState(
     SettingsEvent event,
   ) async* {
-    if (event is GetSettingsEvent) {
+    if (event is PrepareSettingsEvent) {
       SettingsModel settingsModel = await _getSettingsUseCase(NoParams());
-      yield SettingsUpdatedState(settingsModel);
+      yield SettingsReadyToUseState(settingsModel);
     } else if (event is UpdateSettingsEvent) {
       SettingsModel settingsModel = await _editSettingsUseCase(
           EditSettingsUseCaseParams(event.settingsModel));
-      yield SettingsUpdatedState(settingsModel);
+      yield SettingsReadyToUseState(settingsModel);
     }
   }
 }

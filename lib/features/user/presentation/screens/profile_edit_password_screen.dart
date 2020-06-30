@@ -38,7 +38,6 @@ class _ProfileEditPasswordScreenState extends State<ProfileEditPasswordScreen> {
           }
         },
         builder: (context, state) {
-          //  TODO:
           return Container(
             padding: EdgeInsets.all(32),
             child: Form(
@@ -46,6 +45,7 @@ class _ProfileEditPasswordScreenState extends State<ProfileEditPasswordScreen> {
               child: ListView(
                 children: <Widget>[
                   TextFormField(
+                    textDirection: TextDirection.ltr,
                     decoration: new InputDecoration(
                       labelText: translate(Lz.General_Old_Password),
                     ),
@@ -61,6 +61,7 @@ class _ProfileEditPasswordScreenState extends State<ProfileEditPasswordScreen> {
                     obscureText: true,
                   ),
                   TextFormField(
+                    textDirection: TextDirection.ltr,
                     decoration: new InputDecoration(
                         labelText: translate(Lz.General_New_Password)),
                     validator: (value) {
@@ -71,6 +72,19 @@ class _ProfileEditPasswordScreenState extends State<ProfileEditPasswordScreen> {
                     },
                     onChanged: (value) {
                       newPassword = value;
+                    },
+                    obscureText: true,
+                  ),
+                  TextFormField(
+                    textDirection: TextDirection.ltr,
+                    decoration: new InputDecoration(
+                        labelText: translate(Lz.General_Repeat_New_Password)),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return translate(Lz.Error_Empty_Field_Message);
+                      }else if(newPassword != value)
+                        return translate(Lz.Error_Passwords_Dont_Match);
+                      return null;
                     },
                     obscureText: true,
                   ),
