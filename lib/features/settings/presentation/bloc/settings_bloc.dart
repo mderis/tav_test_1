@@ -11,7 +11,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   EditSettingsUseCase _editSettingsUseCase = EditSettingsUseCase();
 
   @override
-  SettingsState get initialState => SettingsUpdatedState(SettingsModel());
+  SettingsState get initialState => SettingsUpdatedState(SettingsModel.getDefault());
 
   @override
   Stream<SettingsState> mapEventToState(

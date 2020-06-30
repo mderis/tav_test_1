@@ -10,7 +10,7 @@ class GetSettingsUseCase extends UseCase<SettingsModel, NoParams> {
   Future<SettingsModel> call(NoParams params) async {
     SettingsModel settingsModel = await _settingsRepository.get();
     if (settingsModel == null) {
-      settingsModel = await _settingsRepository.create(SettingsModel());
+      settingsModel = await _settingsRepository.create(SettingsModel.getDefault());
     }
     return settingsModel;
   }

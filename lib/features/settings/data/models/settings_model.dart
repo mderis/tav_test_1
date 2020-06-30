@@ -6,9 +6,9 @@ class SettingsModel extends Equatable {
   String primaryColor;
 
   SettingsModel(
-      {this.localeString = 'en',
-      this.isDarkTheme = false,
-      this.primaryColor = "#ff0000"});
+      {this.localeString,
+      this.isDarkTheme,
+      this.primaryColor});
 
   static SettingsModel fromJson(Map<String, dynamic> json) {
     return SettingsModel(
@@ -28,4 +28,7 @@ class SettingsModel extends Equatable {
 
   @override
   List<Object> get props => [localeString, isDarkTheme, primaryColor];
+
+  static SettingsModel getDefault() => SettingsModel(
+      localeString: 'en', isDarkTheme: false, primaryColor: "#ff0000");
 }
