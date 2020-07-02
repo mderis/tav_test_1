@@ -22,7 +22,7 @@
     "free": "Free"
   },
   "product": {
-    "empty_list_message": "Add a new product from the below",
+    "empty_list_message": "Sorry! There is no product to show yet",
     "list_title": "Product list",
     "add_product_title": "Add product",
     "edit_product_title": "Edit product"

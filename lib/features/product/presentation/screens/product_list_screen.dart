@@ -130,7 +130,7 @@ class _MainScreenState extends State<ProductListScreen> {
               : translate(Lz.General_Finished)),
           onTap: () {
             Navigator.pushNamed(context, '/product/details',
-                arguments: ProductDetailsArgs(product.id));
+                arguments: ProductDetailsArgs(product));
           },
         ),
         background: Container(
