@@ -30,7 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
       bloc: _userBloc,
       listener: (context, state) {
         if (state is UserReadyToUseState) {
-          Navigator.pushReplacementNamed(context, '/product/list');
+          Navigator.pushReplacementNamed(context, '/product/shop');
+//          Navigator.pushReplacementNamed(context, '/product/list');
 //        Navigator.pushReplacementNamed(context, '/login');
         }
       },

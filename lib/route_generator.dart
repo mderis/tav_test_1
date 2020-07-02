@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tavtestproject1/features/product/presentation/screens/product_shop_details_screen.dart';
+import 'package:tavtestproject1/features/product/presentation/screens/product_shop_screen.dart';
 import 'package:tavtestproject1/features/settings/presentation/screens/settings_screen.dart';
 import 'package:tavtestproject1/features/splash/presentation/screens/splash_screen.dart';
 import 'package:tavtestproject1/features/user/presentation/screens/login_screen.dart';
@@ -24,6 +26,10 @@ class RouteGenerator {
       case '/profile/edit':
         return MaterialPageRoute(builder: (_) => ProfileEditScreen());
       //---------------------------------------------------------------------//
+      case '/product/shop':
+        return MaterialPageRoute(builder: (_) => ProductShopScreen());
+      case '/product/shop/details':
+        return MaterialPageRoute(builder: (_) => ProductShopDetailsScreen(args));
       case '/product/list':
         return MaterialPageRoute(builder: (_) => ProductListScreen());
       case '/product/add':
@@ -42,9 +48,9 @@ class RouteGenerator {
 class ProductAddArgs {}
 
 class ProductDetailsArgs {
-  final String id;
+  final ProductModel productModel;
 
-  ProductDetailsArgs(this.id);
+  ProductDetailsArgs(this.productModel);
 }
 
 class ProductEditArgs {

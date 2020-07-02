@@ -13,10 +13,9 @@ dependencies:
   flutter:
     sdk: flutter
   # Bloc for state management  #  https://pub.dev/packages/flutter_bloc
-  bloc: ^4.0.0
-  flutter_bloc: ^4.0.0
+  flutter_bloc: ^4.0.1
   # Value equality  #  https://pub.dev/packages/equatable
-  equatable: ^1.1.1
+  equatable: ^1.2.0
   # Functional programming thingies  #  https://pub.dev/packages/dartz
   dartz: ^0.9.0
   # DB  #  https://pub.dev/packages/sembast

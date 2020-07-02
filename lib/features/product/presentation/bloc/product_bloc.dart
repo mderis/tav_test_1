@@ -15,6 +15,7 @@ import 'bloc.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final GetAllProductsUseCase _getAllProductsUseCase = GetAllProductsUseCase();
+  final GetProductUseCase _getProductUseCase = GetProductUseCase();
   final SearchProductsUseCase _searchProductsUseCase = SearchProductsUseCase();
   final AddProductUseCase _addProductUseCase = AddProductUseCase();
   final DeleteProductUseCase _deleteProductUseCase = DeleteProductUseCase();
@@ -36,7 +37,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       yield ProductListLoadingState();
       List<ProductModel> productList = await _getAllProductsUseCase(NoParams());
       yield ProductListLoadedState(productList);
-    } else if (event is AddProductEvent) {
+    } else if (event is GetProductEvent) {
+      ProductModel productModel = await _getProductUseCase(GetProductUseCaseParams(event.productId));
+      yield ProductLoadedState(productModel);
+    }else if (event is AddProductEvent) {
       await _addProductUseCase(AddProductUseCaseParams(event.productModel));
       add(GetAllProductsEvent());
     } else if (event is DeleteProductEvent) {
@@ -44,8 +48,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           DeleteProductUseCaseParams(event.productModel));
       add(GetAllProductsEvent());
     } else if (event is EditProductEvent) {
-      await _editProductUseCase(EditProductUseCaseParams(event.productModel));
-      add(GetAllProductsEvent());
+      ProductModel productModel = await _editProductUseCase(EditProductUseCaseParams(event.productModel));
+      yield ProductLoadedState(productModel);
+//      add(GetAllProductsEvent());
     }
   }
 }

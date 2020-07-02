@@ -9,34 +9,44 @@ import 'package:tavtestproject1/features/product/presentation/bloc/bloc.dart';
 import 'package:tavtestproject1/route_generator.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  String productId;
+  ProductModel _productModel;
 
   ProductDetailsScreen(ProductDetailsArgs args) {
-    productId = args.id;
+    _productModel = args.productModel;
   }
 
   @override
-  _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
+  _ProductDetailsScreenState createState() =>
+      _ProductDetailsScreenState(_productModel);
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  ProductModel _productModel;
   ProductBloc _productBloc;
+
+  _ProductDetailsScreenState(this._productModel);
 
   @override
   void initState() {
     super.initState();
     _productBloc = BlocProvider.of<ProductBloc>(context);
-    _productBloc.add(GetAllProductsEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductBloc, ProductState>(
+    return BlocConsumer<ProductBloc, ProductState>(
       bloc: _productBloc,
+      listenWhen: (oldState, newState) => newState is ProductLoadedState,
+      listener: (context, state) {
+        ProductModel newProductModel =
+            (state as ProductLoadedState).productModel;
+        if (newProductModel.id == _productModel.id)
+          _productModel = newProductModel;
+        setState(() {});
+      },
       builder: (context, state) {
-        if (state is ProductListLoadedState) {
-          return _buildDetailsWidget(state.productList
-              .firstWhere((element) => element.id == widget.productId));
+        if (state is ProductLoadedState) {
+          return _buildDetailsWidget(_productModel);
         } else {
           return Center(
             child: Text(
