@@ -25,41 +25,66 @@ class _ProductShopScreenState extends State<ProductShopScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: _getAppBar(),
-      body: _getProductList(),
-//      drawer: MainDrawer('/product/shop'),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 24,
+          ),
+          _getTabBar(),
+          Flexible(flex: 1, child: _getProductList()),
+        ],
+      ),
+      drawer: MainDrawer('/product/shop'),
       backgroundColor: Color.fromRGBO(239, 239, 239, 1),
     );
   }
 
   AppBar _getAppBar() {
     return AppBar(
-      title: FaIcon(
-        FontAwesomeIcons.gripLines,
-        color: Color.fromRGBO(105, 101, 95, 1),
+      automaticallyImplyLeading: false,
+      title: Builder(
+        builder: (context){
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: FaIcon(
+                  FontAwesomeIcons.gripLines,
+                  color: Color.fromRGBO(105, 101, 95, 1),
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              ),
+              IconButton(
+                icon: FaIcon(
+                  FontAwesomeIcons.shoppingCart,
+                  color: Color.fromRGBO(105, 101, 95, 1),
+                ),
+                onPressed: () {},
+              ),
+              // Your widgets here
+            ],
+          );
+        },
       ),
       backgroundColor: Colors.transparent,
       elevation: 0,
-      actions: <Widget>[
-        IconButton(
-          icon: FaIcon(
-            FontAwesomeIcons.shoppingCart,
-            color: Color.fromRGBO(105, 101, 95, 1),
-          ),
-          onPressed: () {},
-        )
-      ],
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: Size.fromHeight(60),
         child: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: BlocBuilder<ProductBloc, ProductState>(
             bloc: _productBloc,
             builder: (context, state) {
               return Container(
-                padding: EdgeInsetsDirectional.fromSTEB(18, 0, 18, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                 child: TextFormField(
+                  autofocus: false,
                   onChanged: (value) {
                     if (state is ProductListLoadingState) return;
                     _productBloc.add(SearchProductsEvent(value));
@@ -89,10 +114,53 @@ class _ProductShopScreenState extends State<ProductShopScreen> {
     );
   }
 
+  Widget _getTabBar() {
+    return DefaultTabController(
+      length: 8,
+      child: TabBar(
+        indicatorColor: Color.fromRGBO(96, 91, 85, 1),
+        unselectedLabelColor: Color.fromRGBO(182, 180, 177, 1),
+        labelColor: Color.fromRGBO(96, 91, 85, 1),
+        isScrollable: true,
+        labelStyle:
+            TextStyle(color: Color.fromRGBO(96, 91, 85, 1), fontSize: 18),
+        tabs: [
+          Tab(
+            text: "FOOD",
+          ),
+          Tab(
+            text: "TECHNOLOGY",
+          ),
+          Tab(
+            text: "INDUSTRY",
+          ),
+          Tab(
+            text: "MEDITATION",
+          ),
+          Tab(
+            text: "STRATEGY",
+          ),
+          Tab(
+            text: "NAVBAR",
+          ),
+          Tab(
+            text: "MOBILE",
+          ),
+          Tab(
+            text: "ACCESSORY",
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _getProductList() {
     return BlocBuilder<ProductBloc, ProductState>(
       bloc: _productBloc,
-      condition: (oldState, newState)=> newState is ProductListLoadedState|| newState is ProductListLoadingState|| newState is ProductListEmptyState,
+      condition: (oldState, newState) =>
+          newState is ProductListLoadedState ||
+          newState is ProductListLoadingState ||
+          newState is ProductListEmptyState,
       builder: (context, state) {
         if (state is ProductListLoadedState) {
           if (state.productList.length == 0) {
@@ -127,7 +195,7 @@ class _ProductShopScreenState extends State<ProductShopScreen> {
               padding: const EdgeInsets.only(top: 20),
               child: GridView.builder(
                 itemCount: state.productList.length,
-                padding: EdgeInsets.all(18),
+                padding: EdgeInsets.all(24),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 24,

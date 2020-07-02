@@ -41,20 +41,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ProductModel newProductModel =
             (state as ProductLoadedState).productModel;
         if (newProductModel.id == _productModel.id)
-          _productModel = newProductModel;
-        setState(() {});
+          setState(() {
+            _productModel = newProductModel;
+          });
       },
       builder: (context, state) {
-        if (state is ProductLoadedState) {
-          return _buildDetailsWidget(_productModel);
-        } else {
-          return Center(
-            child: Text(
-              "Something unexpected happened :(",
-              style: TextStyle(fontSize: 32, color: Colors.redAccent),
-            ),
-          );
-        }
+        return _buildDetailsWidget(_productModel);
       },
     );
   }

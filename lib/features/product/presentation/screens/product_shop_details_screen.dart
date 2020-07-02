@@ -44,7 +44,11 @@ class _ProductShopDetailsScreenState extends State<ProductShopDetailsScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
           body: Stack(
             children: <Widget>[
               Column(
@@ -70,13 +74,13 @@ class _ProductShopDetailsScreenState extends State<ProductShopDetailsScreen> {
                 ],
               ),
               Positioned(
-                top: 20,
+                top: 100,
                 right: 20,
                 child: Container(
                   height: 35,
                   width: 35,
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(228, 227, 225, 1),
+                    color: Color.fromRGBO(228, 227, 225, 0.6),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: IconButton(

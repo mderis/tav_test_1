@@ -71,13 +71,30 @@ class _ProductShopItemState extends State<ProductShopItem> {
                             ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        _productModel.name,
-                        style: TextStyle(
-                            fontFamily: "Geometria",
-                            fontSize: 16,
-                            color: Color.fromRGBO(78, 74, 71, 1)),
+                      padding: EdgeInsets.all(12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Flexible(
+                            child: Text(
+                              _productModel.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontFamily: "Geometria",
+                                  fontSize: 16,
+                                  color: Color.fromRGBO(78, 74, 71, 1),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Text(
+                            _productModel.price.toString() + "\$",
+                            style: TextStyle(
+                                fontFamily: "Geometria",
+                                fontSize: 22,
+                                color: Color.fromRGBO(78, 74, 71, 1),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                     )
                   ],
